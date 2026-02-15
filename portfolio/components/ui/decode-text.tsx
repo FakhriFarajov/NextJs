@@ -3,7 +3,13 @@ import { useState, useRef } from "react";
 
 const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-export default function DecryptText({ text }: { text: string }) {
+interface DecryptTextProps {
+  text: string;
+  fontSize?: string;
+  as?: "h1" | "h2" | "h3" | "p" | "span";
+}
+
+export default function DecryptText({ text, fontSize = "70px", as: Tag = "h1" }: DecryptTextProps) {
   const [displayText, setDisplayText] = useState(text);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -40,16 +46,17 @@ export default function DecryptText({ text }: { text: string }) {
   };
 
   return (
-    <h1
+    <Tag
       onMouseEnter={handleHover}
       style={{
-        fontSize: "70px",
+        fontSize,
         fontWeight: "bold",
         cursor: "pointer",
-        letterSpacing: "6px",
+        letterSpacing: "4px",
+        margin: 0,
       }}
     >
       {displayText}
-    </h1>
+    </Tag>
   );
 }
