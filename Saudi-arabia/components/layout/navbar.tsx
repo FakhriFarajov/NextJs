@@ -9,14 +9,14 @@ export default function Navbar() {
                 <Image src="/logo.png" alt="logo" width={213} height={118} />
             </Link>
             <ul className="flex gap-14">
-                <Link href="/destenations" className="text-2xl font-medium text-white">
-                    Destenations
+                <Link href="/destinations" className="text-2xl font-medium text-white">
+                    Destinations
                 </Link>
                 <Link href="/members" className="text-2xl font-medium text-white">
                     Members
                 </Link>
-                <Link href="/gallery" className="text-2xl font-medium text-white">
-                    Gallery
+                <Link href="/about-us" className="text-2xl font-medium text-white">
+                    About Us
                 </Link>
             </ul>
 

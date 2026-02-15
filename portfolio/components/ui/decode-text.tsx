@@ -17,10 +17,12 @@ export default function DecryptText({ text }: { text: string }) {
         text
           .split("")
           .map((letter, index) => {
-            if (letter === " ") return " ";
-
             if (index < iteration) {
               return text[index];
+            }
+
+            if (letter === " ") {
+              return Math.random() > 0.5 ? " " : letters[Math.floor(Math.random() * 26)];
             }
 
             return letters[Math.floor(Math.random() * 26)];

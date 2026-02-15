@@ -13,7 +13,7 @@ export default function Home() {
         gap: "20px",
       }}
     >
-      <DecryptText text="Opera" />
+      <DecryptText text="ABOUT OPERA NEON" />
     </main>
   );
 }

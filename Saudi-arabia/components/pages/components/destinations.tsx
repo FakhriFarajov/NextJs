@@ -3,8 +3,6 @@ import DestinationCard from "@/components/ui/destination-card";
 import SectionHeader from "./section-header";
 import { useMobile } from "../../../app/hooks/use-mobile";
 import { useTablet } from "../../../app/hooks/use-tablet";
-import DesertHero from "./desert-hero";
-import ExploreBanner from "./explore-banner";
 
 const destinations = [
     {
@@ -76,7 +74,7 @@ const destinations = [
 
 ]
 
-export default function Destenations() {
+export default function Destnations() {
     const isMobile = useMobile();
     const isTablet = useTablet();
 
@@ -114,7 +112,7 @@ export default function Destenations() {
 
 
     return (
-        <section className="mt-12 container mx-auto pb-20">
+        <section className="mt-7 container mx-auto">
             <SectionHeader
                 title="Best Destinations"
                 description="Explore the enchanting landscapes of saudi Arabia, from
@@ -134,11 +132,6 @@ export default function Destenations() {
             <div className="flex justify-end font-bold mt-8 pb-8">
                 <h1 className="underline text-white">See all</h1>
             </div>
-
-            <DesertHero traveler={destinations[0].traveler} />
-
-            <ExploreBanner />
-
         </section>
     )
 }

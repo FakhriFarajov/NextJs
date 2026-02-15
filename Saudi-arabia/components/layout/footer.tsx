@@ -9,24 +9,24 @@ export default function Footer() {
                 <Image src="/logo.png" alt="logo" width={400} height={400} />
             </Link>
             <ul className="flex gap-14">
-                <h2 className="text-2xl font-bold text-white">
+                <div className="text-2xl font-bold text-white">
                     About
-                    <h2 className="font-medium">About Us</h2>
-                    <h2 className="font-medium">Features</h2>
-                    <h2 className="font-medium">News & Blogs</h2>
-                </h2>
-                <h2 className="text-2xl font-bold text-white">
+                    <h2 className="font-thin">About Us</h2>
+                    <h2 className="font-thin">Features</h2>
+                    <h2 className="font-thin">News & Blogs</h2>
+                </div>
+                <div className="text-2xl font-bold text-white">
                     Contact
-                    <h2 className="font-medium">Instagram</h2>
-                    <h2 className="font-medium">Twitter</h2>
-                    <h2 className="font-medium">Facebook</h2>
-                </h2>
-                <h2 className="text-2xl font-bold text-white">
+                    <h2 className="font-thin">Instagram</h2>
+                    <h2 className="font-thin">Twitter</h2>
+                    <h2 className="font-thin">Facebook</h2>
+                </div>
+                <div className="text-2xl font-bold text-white">
                     Support
-                    <h2 className="font-medium">FAQs</h2>
-                    <h2 className="font-medium">Support Center</h2>
-                    <h2 className="font-medium">Feedback</h2>
-                </h2>
+                    <h2 className="font-thin">FAQs</h2>
+                    <h2 className="font-thin">Support Center</h2>
+                    <h2 className="font-thin">Feedback</h2>
+                </div>
             </ul>
 
         </footer>

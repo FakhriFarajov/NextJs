@@ -10,7 +10,7 @@ interface DesertHeroProps {
 
 export default function DesertHero({ traveler }: DesertHeroProps) {
     return (
-        <div className="relative w-screen left-1/2 -translate-x-1/2 h-[90vh]">
+        <div className="relative left-1/2 -translate-x-1/2 h-[90vh]">
             <Image src="/desert.jpg" alt="explore" fill className="object-cover" />
             <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black" />
             <div className="relative z-10 flex items-end justify-center h-full">
