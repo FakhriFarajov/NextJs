@@ -7,9 +7,11 @@ interface DecryptTextProps {
   text: string;
   fontSize?: string;
   as?: "h1" | "h2" | "h3" | "p" | "span";
+  className?: string;
+  speed?: number; // ms per frame
 }
 
-export default function DecryptText({ text, fontSize = "70px", as: Tag = "h1" }: DecryptTextProps) {
+export default function DecryptText({ text, fontSize = "70px", as: Tag = "h1", className, speed = 30 }: DecryptTextProps) {
   const [displayText, setDisplayText] = useState(text);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -42,12 +44,13 @@ export default function DecryptText({ text, fontSize = "70px", as: Tag = "h1" }:
         clearInterval(intervalRef.current!);
         setDisplayText(text);
       }
-    }, 30);
+    }, speed);
   };
 
   return (
     <Tag
       onMouseEnter={handleHover}
+      className={className}
       style={{
         fontSize,
         fontWeight: "bold",
