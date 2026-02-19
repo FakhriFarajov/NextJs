@@ -1,25 +1,44 @@
-import { NextRequest, NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
+import { NextRequest, NextResponse } from "next/server";
+import  createIntlMiddleware  from "next-intl/middleware";
 
-const authPages = [
-  "/auth/sign-in",
-];
+const authPages = ["/auth/signin"]
+const protectedPages = ["/dashboard"]
+
+const initMiddleware = createIntlMiddleware({
+    locales: ["en", "ru", "az"],
+    defaultLocale: "en",
+    localePrefix: "always",
+
+})
 
 export default async function proxy(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+    const { pathname } = req.nextUrl;
 
-  const isAuthPage = authPages.some((page) => pathname.startsWith(page));
+    const isAuthPage = authPages.some(page => pathname.startsWith(page));
+    const isProtectedPage = protectedPages.some(page => pathname.startsWith(page));
 
-  const session = await getToken({
-    req,
-    secret: process.env.NEXT_AUTH_SECRET,
-  });
+    const session = await getToken({
+        req,
+        secret: process.env.NEXTAUTH_SECRET,
+    })
 
-  if (isAuthPage && session) { //Email sign in checking implementation REMINDER
-    return NextResponse.redirect(new URL("/", req.url));
-  }
+    // If user is logged in but not authorized, redirect to home (only for protected pages)
+    if (session?.email && session.email !== "azer.kazimov@yahoo.com" && isProtectedPage) {
+        return NextResponse.redirect(new URL("/", req.url));
+    }
 
-  return NextResponse.next();
+    // If user is logged in and tries to access auth pages, redirect to dashboard
+    if (session?.email && isAuthPage){
+        return NextResponse.redirect(new URL("/dashboard", req.url));
+    }
+
+    // If user is not logged in and tries to access protected pages, redirect to signin
+    if (!session?.email && isProtectedPage){
+        return NextResponse.redirect(new URL("/auth/signin", req.url));
+    }
+
+    return initMiddleware(req);
 }
 
 export const config = {

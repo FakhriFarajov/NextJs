@@ -1,0 +1,17 @@
+{
+  "skills": {
+    "title": "Personal Skills",
+    "cards": [
+      { "label": "Communication", "title": "Clear communication opens every door.", "description": "Express ideas clearly and listen actively." },
+      { "label": "Teamwork", "title": "Together, we achieve more.", "description": "Collaborate effectively with others." },
+      { "label": "Critical Thinking", "title": "Question, analyze, improve.", "description": "Analyze situations and make informed decisions." },
+      { "label": "Problem-Solving", "title": "Every problem has a solution.", "description": "Find creative solutions to challenges." },
+      { "label": "Time Management", "title": "Make every minute count.", "description": "Prioritize tasks and meet deadlines." },
+      { "label": "Conflict Resolution", "title": "Turn conflict into opportunity.", "description": "Navigate disagreements constructively." },
+      { "label": "Flexibility", "title": "Change is a chance to grow.", "description": "Adapt to changing circumstances." },
+      { "label": "Decision-Making", "title": "Decide with confidence.", "description": "Choose the best course of action." },
+      { "label": "Reliability", "title": "Dependable in every task.", "description": "Consistently deliver quality work." },
+      { "label": "Multitasking", "title": "Balance many, master all.", "description": "Handle multiple responsibilities efficiently." }
+    ]
+  }
+}

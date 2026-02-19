@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useCallback, useState } from 'react';
 import { gsap } from 'gsap';
 import './MagicBento.css';
 import DecryptText from './decode-text';
+import { useTranslations } from 'next-intl';
 
 export interface BentoCardProps {
   color?: string;
@@ -30,69 +31,6 @@ const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
 const DEFAULT_GLOW_COLOR = '255, 255, 255';
 const MOBILE_BREAKPOINT = 768;
-
-const cardData: BentoCardProps[] = [
-  {
-    color: '#060010',
-    title: 'Clear communication opens every door.',
-    description: 'Express ideas clearly and listen actively.',
-    label: 'Communication'
-  },
-  {
-    color: '#060010',
-    title: 'Together, we achieve more.',
-    description: 'Collaborate effectively with others.',
-    label: 'Teamwork'
-  },
-  {
-    color: '#060010',
-    title: 'Question, analyze, improve.',
-    description: 'Analyze situations and make informed decisions.',
-    label: 'Critical Thinking'
-  },
-  {
-    color: '#060010',
-    title: 'Every problem has a solution.',
-    description: 'Find creative solutions to challenges.',
-    label: 'Problem-Solving'
-  },
-  {
-    color: '#060010',
-    title: 'Make every minute count.',
-    description: 'Prioritize tasks and meet deadlines.',
-    label: 'Time Management'
-  },
-  {
-    color: '#060010',
-    title: 'Turn conflict into opportunity.',
-    description: 'Navigate disagreements constructively.',
-    label: 'Conflict Resolution'
-  },
-  {
-    color: '#060010',
-    title: 'Change is a chance to grow.',
-    description: 'Adapt to changing circumstances.',
-    label: 'Flexibility'
-  },
-  {
-    color: '#060010',
-    title: 'Decide with confidence.',
-    description: 'Choose the best course of action.',
-    label: 'Decision-Making'
-  },
-  {
-    color: '#060010',
-    title: 'Dependable in every task.',
-    description: 'Consistently deliver quality work.',
-    label: 'Reliability'
-  },
-  {
-    color: '#060010',
-    title: 'Balance many, master all.',
-    description: 'Handle multiple responsibilities efficiently.',
-    label: 'Multitasking'
-  }
-];
 
 const createParticleElement = (x: number, y: number): HTMLDivElement => {
   const el = document.createElement('div');
@@ -561,6 +499,8 @@ const MagicBento: React.FC<BentoProps> = ({
   const gridRef = useRef<HTMLDivElement>(null);
   const isMobile = useMobileDetection();
   const shouldDisableAnimations = disableAnimations || isMobile;
+  const t = useTranslations('skills');
+  const cards = t.raw('cards') as BentoCardProps[];
 
   return (
     <>
@@ -574,12 +514,11 @@ const MagicBento: React.FC<BentoProps> = ({
         />
       )}
 
-
       <div style={{ padding: '60px 20px', maxWidth: '1200px', margin: '0 auto' }}>
-        <DecryptText text="PERSONAL SKILLS" fontSize="18px"  as="span" className="text-white font-bold" />
+        <DecryptText text={t('title')} fontSize="18px"  as="span" className="text-white font-bold" />
 
         <BentoCardGrid gridRef={gridRef}>
-          {cardData.map((card, index) => {
+          {cards.map((card, index) => {
             const baseClassName = `magic-bento-card ${textAutoHide ? 'magic-bento-card--text-autohide' : ''} ${enableBorderGlow ? 'magic-bento-card--border-glow' : ''}`;
             const cardProps = {
               className: baseClassName,
