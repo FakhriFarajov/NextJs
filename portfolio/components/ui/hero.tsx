@@ -4,6 +4,7 @@ import TextType from './TextType';
 import SplitText from './SplitText';
 import { useRef, useEffect } from 'react';
 import gsap from 'gsap';
+import { useTranslations } from 'next-intl';
 
 function handleAnimationComplete() {
   console.log("Animation completed!");
@@ -11,6 +12,7 @@ function handleAnimationComplete() {
 
 export default function Hero() {
   const imgRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations();
 
   useEffect(() => {
     // GSAP fade-in from bottom animation
@@ -37,7 +39,7 @@ export default function Hero() {
     >
       <div style={{ flex: 1, maxWidth: '700px' }}>
         <TextType
-          text={["Farajov Fakhri", "Full-Stack Developer"]}
+          text={[t("Hero.name"), t("Hero.role")]}
           typingSpeed={75}
           pauseDuration={1500}
           showCursor
@@ -54,7 +56,7 @@ export default function Hero() {
         />
         <div>
           <SplitText
-            text={'"if you don\'t do it with will, it means you don\'t need it,"'}
+            text={t("Hero.quote")}
             className="text-2xl font-thin text-center italic text-white"
             delay={50}
             duration={1.25}

@@ -1,75 +1,56 @@
-"use client";
-import { useTranslations } from 'next-intl';
-import TextType from '../../../components/ui/TextType';
-import SplitText from '../../../components/ui/SplitText';
-import { useRef, useEffect } from 'react';
-import gsap from 'gsap';
+import Hero from "@/components/ui/hero";
+import SilkBg from "@/components/ui/silk";
+import Skills from "@/components/ui/skills";
+import LogoLoop from "@/components/ui/LogoLoop";
+import { techLogos as baseTechLogos } from "@/data/techLogos";
+import { iconMap } from "@/data/iconMap";
 
-function handleAnimationComplete() {
-  console.log("Animation completed!");
-}
+const techLogos = baseTechLogos.map(item => ({
+  ...item,
+  node: iconMap[item.key as keyof typeof iconMap] || null,
+}));
 
-export default function Hero() {
-  const t = useTranslations();
-  const imgRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // GSAP fade-in from bottom animation
-    if (imgRef.current) {
-      gsap.fromTo(
-        imgRef.current,
-        { opacity: 0, y: 80 },
-        { opacity: 1, y: 0, duration: 1.2, ease: "power3.out" }
-      );
-    }
-  }, []);
-
+export default function Home() {
   return (
-    <section
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        width: '100vw',
-        minHeight: '100vh',
-        padding: '0 5vw',
-        boxSizing: 'border-box',
-      }}
-    >
-      <div style={{ flex: 1, maxWidth: '700px' }}>
-        <TextType
-          text={[t('Hero.name'), t('Hero.role')]}
-          typingSpeed={75}
-          pauseDuration={1500}
-          showCursor
-          cursorCharacter="_"
-          deletingSpeed={50}
-          variableSpeed={false}
-          cursorBlinkDuration={0.5}
-          style={{
-            fontSize: '4rem',
-            fontWeight: 'bold',
-            color: '#ffffff',
-            textShadow: '0 4px 32px rgba(0,0,0,0.35), 0 1px 2px #323232ff',
-          }}
+    <>
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          zIndex: -1,
+        }}
+      >
+        <SilkBg
+          speed={5}
+          scale={1}
+          color="#707070ff"
+          noiseIntensity={1.5}
+          rotation={0}
         />
-        <div>
-          <SplitText
-            text={t('Hero.quote')}
-            className="text-2xl font-thin text-center italic text-white"
-            delay={50}
-            duration={1.25}
-            ease="power3.out"
-            splitType="chars"
-            from={{ opacity: 0, y: 40 }}
-            to={{ opacity: 1, y: 0 }}
-            threshold={0.1}
-            rootMargin="-100px"
-            textAlign="center"
-            onLetterAnimationComplete={handleAnimationComplete}
+      </div>
+      <main
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "20px",
+        }}
+      >
+        <Hero />
+        <Skills />
+        <div style={{ height: '100px', width: '100%', margin: '0 auto', position: 'relative', overflow: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <LogoLoop
+            logos={techLogos}
+            speed={100}
+            direction="left"
+            logoHeight={60}
           />
         </div>
-      </div>
-    </section>
+      </main>
+    </>
   );
 }
