@@ -51,5 +51,10 @@
     "projects": "LAYİHƏLƏR",
     "faq": "SUALLAR",
     "talk": "ƏLAQƏ"
+  },
+  "tab": {
+    "default": "Fakhri Farajov Portfolio",
+    "comeBack": "Qayıdın!",
+    "welcomeBack": "Xoş gəldiniz!"
   }
 }

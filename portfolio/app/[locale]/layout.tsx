@@ -1,5 +1,6 @@
 import Provider from "@/components/providers/IntlProvider";
 import Navbar from "@/components/ui/navbar";
+import TabTitleEffect from "@/components/TabTitleEffect";
 import { getMessages } from "next-intl/server";
 
 interface LocaleLayoutProps {
@@ -15,6 +16,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     
     return (
         <Provider messages={messages}>
+          <TabTitleEffect />
           <Navbar/>
             {children}
         </Provider>

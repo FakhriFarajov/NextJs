@@ -51,5 +51,10 @@
     "projects": "PROJECTS",
     "faq": "FAQ",
     "talk": "TALK"
+  },
+  "tab": {
+    "default": "Fakhri Farajov Portfolio",
+    "comeBack": "Come Back!",
+    "welcomeBack": "Welcome Back!"
   }
 }
