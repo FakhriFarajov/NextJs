@@ -31,13 +31,25 @@
     "header": "Əlaqə üçün məlumatlarınızı daxil edin"
   },
   "Hero": {
-    "nav": {
-      "projects": "Layihələr",
-      "faq": "Tez-tez verilən suallar",
-      "talk": "Əlaqə"
-    },
     "name": "Farajov Fakhri",
     "role": "Full-Stack Developer",
     "quote": "Əgər bunu istəklə etmirsənsə, deməli sənə lazım deyil."
+  },
+  "signIn": {
+    "title": "Hesabınıza daxil olun",
+    "description": "E-poçtunuzu daxil edin və hesabınıza daxil olun",
+    "signup": "Qeydiyyat",
+    "email": "E-poçt",
+    "emailPlaceholder": "m@example.com",
+    "password": "Şifrə",
+    "forgotPassword": "Şifrənizi unutmusunuz?",
+    "login": "Daxil ol",
+    "loginGithub": "GitHub ilə daxil ol"
+  },
+  "nav": {
+    "home": "FƏXRİ FƏRƏCOV",
+    "projects": "LAYİHƏLƏR",
+    "faq": "SUALLAR",
+    "talk": "ƏLAQƏ"
   }
 }

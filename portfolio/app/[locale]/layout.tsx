@@ -1,4 +1,5 @@
 import Provider from "@/components/providers/IntlProvider";
+import Navbar from "@/components/ui/navbar";
 import { getMessages } from "next-intl/server";
 
 interface LocaleLayoutProps {
@@ -14,6 +15,7 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
     
     return (
         <Provider messages={messages}>
+          <Navbar/>
             {children}
         </Provider>
     )

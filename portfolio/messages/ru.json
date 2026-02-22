@@ -31,13 +31,25 @@
     "header": "Оставьте свои данные"
   },
   "Hero": {
-    "nav": {
-      "projects": "Проекты",
-      "faq": "FAQ",
-      "talk": "Связаться"
-    },
     "name": "Фараджов Фахри",
     "role": "Full-Stack Developer",
     "quote": "Если ты не делаешь это по воле, значит тебе это не нужно."
+  },
+  "signIn": {
+    "title": "Войти в свой аккаунт",
+    "description": "Введите свой email, чтобы войти в аккаунт",
+    "signup": "Регистрация",
+    "email": "Email",
+    "emailPlaceholder": "m@example.com",
+    "password": "Пароль",
+    "forgotPassword": "Забыли пароль?",
+    "login": "Войти",
+    "loginGithub": "Войти через GitHub"
+  },
+  "nav": {
+    "home": "ФАХРИ ФАРАДЖОВ",
+    "projects": "ПРОЕКТЫ",
+    "faq": "ВОПРОСЫ",
+    "talk": "КОНТАКТ"
   }
 }

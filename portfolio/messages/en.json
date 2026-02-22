@@ -31,13 +31,25 @@
     "header": "Leave Your Details"
   },
   "Hero": {
-    "nav": {
-      "projects": "Projects",
-      "faq": "FAQ",
-      "talk": "Talk"
-    },
     "name": "Farajov Fakhri",
     "role": "Full-Stack Developer",
     "quote": "if you don't do it with will, it means you don't need it,"
+  },
+  "signIn": {
+    "title": "Login to your account",
+    "description": "Enter your email below to login to your account",
+    "signup": "Sign Up",
+    "email": "Email",
+    "emailPlaceholder": "m@example.com",
+    "password": "Password",
+    "forgotPassword": "Forgot your password?",
+    "login": "Login",
+    "loginGithub": "Login with GitHub"
+  },
+  "nav": {
+    "home": "FAKHRI FARAJOV",
+    "projects": "PROJECTS",
+    "faq": "FAQ",
+    "talk": "TALK"
   }
 }

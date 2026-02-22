@@ -4,10 +4,18 @@ import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { navLinks } from "@/data/navLinks";
 
 export default function Navbar() {
   const navRef = useRef(null);
   const pathname = usePathname();
+  const t = useTranslations();
+
+  const links = navLinks.map((link) => ({
+    ...link,
+    label: t(link.labelKey),
+  }));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,13 +39,6 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const links = [
-    { href: "/", label: "FAKHRI FARAJOV", fontSize: "18px" },
-    { href: "/projects", label: "PROJECTS", fontSize: "14px" },
-    { href: "/faq", label: "FAQ", fontSize: "14px" },
-    { href: "/talk", label: "TALK", fontSize: "14px" },
-  ];
 
   return (
     <nav
