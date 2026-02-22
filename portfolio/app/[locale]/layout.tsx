@@ -2,6 +2,7 @@ import ProviderIntl from '@/components/providers/IntlProvider';
 import { ReactNode } from 'react';
 import { notFound } from 'next/navigation';
 import { getMessages } from 'next-intl/server';
+import { Locale } from '../../i18n/locales';
 
 interface LocaleLayoutProps {
     children: ReactNode;
@@ -13,13 +14,12 @@ export default async function LocaleLayout({
   params,
 }: LocaleLayoutProps) 
 {
-
     const {locale} = params;
     const messages = await getMessages({locale});
 
-  return (
-    <ProviderIntl locale={locale}
-      {children}
-    </ProviderIntl>
-  );
+    return (
+      <ProviderIntl messages={messages}>
+        {children}
+      </ProviderIntl>
+    );
 }

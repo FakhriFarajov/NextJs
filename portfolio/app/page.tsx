@@ -1,5 +1,4 @@
 import Hero from "@/components/ui/hero";
-import SilkBg from "@/components/ui/silk";
 import Skills from "@/components/ui/skills";
 import LogoLoop from "@/components/ui/LogoLoop";
 import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiSharp, SiCplusplus, SiAmazon, SiDocker, SiPython, SiMysql, SiPostgresql, SiMongodb } from "react-icons/si";
@@ -23,24 +22,6 @@ export default function Home() {
 
   return (
     <>
-      <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: -1,
-        }}
-      >
-        <SilkBg
-          speed={5}
-          scale={1}
-          color="#707070ff"
-          noiseIntensity={1.5}
-          rotation={0}
-        />
-      </div>
       <main
         style={{
           display: "flex",

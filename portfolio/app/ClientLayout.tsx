@@ -1,19 +1,32 @@
 "use client";
 import AuthProvider from "@/components/providers/auth-provider";
-import ProviderIntl from "@/components/providers/IntlProvider";
 import Navbar from "@/components/ui/navbar";
-import enMessages from "@/messages/en.json";
+import SilkBg from "@/components/ui/silk";
 
 export default function ClientLayout({ session, children }: { session: any; children: React.ReactNode }) {
   // In production, detect locale and load messages dynamically
-  const locale = "en";
-  const messages = enMessages;
   return (
     <AuthProvider session={session}>
-      <ProviderIntl locale={locale} messages={messages}>
-        <Navbar />
-        {children}
-      </ProviderIntl>
+      <div
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          zIndex: -1,
+        }}
+      >
+        <SilkBg
+          speed={5}
+          scale={1}
+          color="#707070ff"
+          noiseIntensity={1.5}
+          rotation={0}
+        />
+      </div>
+      <Navbar />
+      {children}
     </AuthProvider>
   );
 }

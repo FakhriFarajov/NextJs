@@ -13,5 +13,31 @@
       { "label": "Etibarlılıq", "title": "Hər işdə etibarlılıq.", "description": "Keyfiyyətli işi davamlı yerinə yetirin." },
       { "label": "Çoxlu vəzifələrin idarə olunması", "title": "Çox şeyi balanslaşdırın, hamısına yiyələnin.", "description": "Bir neçə məsuliyyəti effektiv idarə edin." }
     ]
+  },
+  "talk": {
+    "jobTypes": {
+      "full_time": "Tam ştat",
+      "part_time": "Yarım ştat",
+      "contract": "Müqavilə",
+      "internship": "Təcrübə",
+      "freelance": "Frilans"
+    },
+    "fields": {
+      "Name": "Ad",
+      "Email": "Email",
+      "Message": "Mesaj",
+      "SendMessage": "Mesaj göndər"
+    },
+    "header": "Əlaqə üçün məlumatlarınızı daxil edin"
+  },
+  "Hero": {
+    "nav": {
+      "projects": "Layihələr",
+      "faq": "Tez-tez verilən suallar",
+      "talk": "Əlaqə"
+    },
+    "name": "Farajov Fakhri",
+    "role": "Full-Stack Developer",
+    "quote": "Əgər bunu istəklə etmirsənsə, deməli sənə lazım deyil."
   }
 }

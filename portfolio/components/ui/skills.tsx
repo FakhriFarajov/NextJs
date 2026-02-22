@@ -43,8 +43,6 @@ export default function Skills() {
         glowColor="132, 0, 255"
         disableAnimations={false}
       />
-
-
     </section>
   );
 }
