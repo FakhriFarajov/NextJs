@@ -2,25 +2,15 @@ import Hero from "@/components/ui/hero";
 import SilkBg from "@/components/ui/silk";
 import Skills from "@/components/ui/skills";
 import LogoLoop from "@/components/ui/LogoLoop";
-import { SiReact, SiNextdotjs, SiTypescript, SiTailwindcss, SiSharp, SiCplusplus, SiAmazon, SiDocker, SiPython, SiMysql, SiPostgresql, SiMongodb } from "react-icons/si";
+import { techLogos as baseTechLogos } from "@/data/techLogos";
+import { iconMap } from "@/data/iconMap";
+
+const techLogos = baseTechLogos.map(item => ({
+  ...item,
+  node: iconMap[item.key as keyof typeof iconMap] || null,
+}));
 
 export default function Home() {
-  const techLogos = [
-    { node: <SiReact color="#fff" />, title: "React", href: "https://react.dev" },
-    { node: <SiNextdotjs color="#fff" />, title: "Next.js", href: "https://nextjs.org" },
-    { node: <SiTypescript color="#fff" />, title: "TypeScript", href: "https://www.typescriptlang.org" },
-    { node: <SiTailwindcss color="#fff" />, title: "Tailwind CSS", href: "https://tailwindcss.com" },
-    { node: <SiSharp color="#fff" />, title: "C#", href: "https://learn.microsoft.com/en-us/dotnet/csharp/" },
-    { node: <SiCplusplus color="#fff" />, title: "C++", href: "https://isocpp.org/" },
-    { node: <SiAmazon color="#fff" />, title: "AWS", href: "https://aws.amazon.com/" },
-    { node: <SiDocker color="#fff" />, title: "Docker", href: "https://www.docker.com/" },
-    { node: <SiReact color="#fff" />, title: "React Native", href: "https://reactnative.dev/" },
-    { node: <SiPython color="#fff" />, title: "Python", href: "https://www.python.org/" },
-    { node: <SiMysql color="#fff" />, title: "MySQL", href: "https://www.mysql.com/" },
-    { node: <SiPostgresql color="#fff" />, title: "PostgreSQL", href: "https://www.postgresql.org/" },
-    { node: <SiMongodb color="#fff" />, title: "MongoDB", href: "https://www.mongodb.com/" },
-  ];
-
   return (
     <>
       <div

@@ -1,14 +1,14 @@
-import { Messages, NextIntlClientProvider } from "next-intl";
+import { Messages, NextIntlClientProvider } from 'next-intl';
 
-interface IntlProviderProps {
+interface ProviderProps {
     children: React.ReactNode;
     messages: Messages;
 }
 
-export default function ProviderIntl({ children, messages }: IntlProviderProps) {
-  return (
-    <NextIntlClientProvider messages={messages}>
-      {children}
-    </NextIntlClientProvider>
-  );
+export default function Provider({ children, messages }: ProviderProps) {
+    return (
+        <NextIntlClientProvider messages={messages}>
+            {children}
+        </NextIntlClientProvider>
+    )
 }

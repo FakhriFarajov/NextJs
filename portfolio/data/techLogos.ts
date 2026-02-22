@@ -1,0 +1,15 @@
+export const techLogos = [
+  { node: null, key: "react", title: "React", href: "https://react.dev" },
+  { node: null, key: "nextjs", title: "Next.js", href: "https://nextjs.org" },
+  { node: null, key: "typescript", title: "TypeScript", href: "https://www.typescriptlang.org" },
+  { node: null, key: "tailwindcss", title: "Tailwind CSS", href: "https://tailwindcss.com" },
+  { node: null, key: "csharp", title: "C#", href: "https://learn.microsoft.com/en-us/dotnet/csharp/" },
+  { node: null, key: "cplusplus", title: "C++", href: "https://isocpp.org/" },
+  { node: null, key: "aws", title: "AWS", href: "https://aws.amazon.com/" },
+  { node: null, key: "docker", title: "Docker", href: "https://www.docker.com/" },
+  { node: null, key: "reactnative", title: "React Native", href: "https://reactnative.dev/" },
+  { node: null, key: "python", title: "Python", href: "https://www.python.org/" },
+  { node: null, key: "mysql", title: "MySQL", href: "https://www.mysql.com/" },
+  { node: null, key: "postgresql", title: "PostgreSQL", href: "https://www.postgresql.org/" },
+  { node: null, key: "mongodb", title: "MongoDB", href: "https://www.mongodb.com/" },
+];

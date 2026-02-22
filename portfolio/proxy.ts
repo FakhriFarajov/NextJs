@@ -2,21 +2,21 @@ import { getToken } from "next-auth/jwt";
 import { NextRequest, NextResponse } from "next/server";
 import  createIntlMiddleware  from "next-intl/middleware";
 
+
 const authPages = ["/auth/signin"]
 const protectedPages = ["/dashboard"]
 
-const initMiddleware = createIntlMiddleware({
+const intlMiddleware = createIntlMiddleware({
     locales: ["en", "ru", "az"],
     defaultLocale: "en",
     localePrefix: "always",
-
 })
 
 export default async function proxy(req: NextRequest) {
-    const { pathname } = req.nextUrl;
+    const { pathname } = req.nextUrl; //localhost:3000/en/about
 
-    const isAuthPage = authPages.some(page => pathname.startsWith(page));
-    const isProtectedPage = protectedPages.some(page => pathname.startsWith(page));
+    const isAuthPage = authPages.some(page => pathname.includes(page));
+    const isProtectedPage = protectedPages.some(page => pathname.includes(page));
 
     const session = await getToken({
         req,
@@ -35,10 +35,10 @@ export default async function proxy(req: NextRequest) {
 
     // If user is not logged in and tries to access protected pages, redirect to signin
     if (!session?.email && isProtectedPage){
-        return NextResponse.redirect(new URL("/auth/signin", req.url));
+        return NextResponse.redirect(new URL("/auth/sign-in", req.url));
     }
 
-    return initMiddleware(req);
+    return intlMiddleware(req);
 }
 
 export const config = {
