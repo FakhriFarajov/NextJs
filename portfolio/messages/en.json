@@ -24,8 +24,11 @@
     },
     "fields": {
       "Name": "Name",
+      "NamePlaceholder": "Your Name",
       "Email": "Email",
+      "EmailPlaceholder": "Your Email",
       "Message": "Message",
+      "MessagePlaceholder": "Your description",
       "SendMessage": "Send Message"
     },
     "header": "Leave Your Details"

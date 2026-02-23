@@ -13,24 +13,7 @@ const techLogos = baseTechLogos.map(item => ({
 export default function Home() {
   return (
     <>
-      <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: -1,
-        }}
-      >
-        <SilkBg
-          speed={5}
-          scale={1}
-          color="#707070ff"
-          noiseIntensity={1.5}
-          rotation={0}
-        />
-      </div>
+
       <main
         style={{
           display: "flex",

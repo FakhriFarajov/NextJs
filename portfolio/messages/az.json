@@ -23,9 +23,12 @@
       "freelance": "Frilans"
     },
     "fields": {
-      "Name": "Ad",
-      "Email": "Email",
-      "Message": "Mesaj",
+      "Name": "Ad*",
+      "NamePlaceholder": "Adınız",
+      "Email": "E-poçt*",
+      "EmailPlaceholder": "E-poçtunuz",
+      "Message": "Mesaj*",
+      "MessagePlaceholder": "Təsviriniz",
       "SendMessage": "Mesaj göndər"
     },
     "header": "Əlaqə üçün məlumatlarınızı daxil edin"

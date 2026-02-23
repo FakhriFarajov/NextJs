@@ -23,9 +23,12 @@
       "freelance": "Фриланс"
     },
     "fields": {
-      "Name": "Имя",
-      "Email": "Эл. почта",
-      "Message": "Сообщение",
+      "Name": "Имя*",
+      "NamePlaceholder": "Ваше имя",
+      "Email": "Эл. почта*",
+      "EmailPlaceholder": "Ваш email",
+      "Message": "Сообщение*",
+      "MessagePlaceholder": "Ваше описание",
       "SendMessage": "Отправить сообщение"
     },
     "header": "Оставьте свои данные"

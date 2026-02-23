@@ -6,6 +6,7 @@ import { useState, useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import { Input } from '@/components/ui/input';
 import { Textarea } from "@/components/ui/textarea"
+import { FaRegPaperPlane } from "react-icons/fa";
 
 const jobTypes = [
     { key: 'full_time', value: 'full_time' },
@@ -50,7 +51,7 @@ export default function Talk() {
     };
 
     return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-black p-6">
+        <div className="flex flex-col items-center justify-center min-h-screen p-6">
             {/* Header */}
             <div className="flex justify-center items-center mb-12">
                 <DecryptText
@@ -101,8 +102,8 @@ export default function Talk() {
                         />
                     </div>
                     <Input 
-                        placeholder={t(`talk.fields.Name`)} 
-                        className="mt-2 text-xs py-2 px-2 w-full bg-white/5 border-white/20 text-white rounded-lg" 
+                        placeholder={t(`talk.fields.NamePlaceholder`)} 
+                        className="mt-2 text-xs py-2 px-2 w-full bg-white/5 border-white/20 text-white rounded-lg placeholder:text-white/60" 
                     />
                 </div>
 
@@ -116,8 +117,8 @@ export default function Talk() {
                         />
                     </div>
                     <Input 
-                        placeholder={t(`talk.fields.Email`)} 
-                        className="mt-2 text-xs py-2 px-2 w-full bg-white/5 border-white/20 text-white rounded-lg" 
+                        placeholder={t(`talk.fields.EmailPlaceholder`)} 
+                        className="mt-2 text-xs py-2 px-2 w-full bg-white/5 border-white/20 text-white rounded-lg placeholder:text-white/60" 
                     />
                 </div>
 
@@ -131,13 +132,14 @@ export default function Talk() {
                         />
                     </div>
                     <Textarea 
-                        placeholder={t(`talk.fields.Message`)} 
-                        className="mt-2 text-xs p-2 w-full bg-white/5 border-white/20 text-white rounded-lg resize-none h-[250px]" 
+                        placeholder={t(`talk.fields.MessagePlaceholder`)} 
+                        className="mt-2 text-xs p-2 w-full bg-white/5 border-white/20 text-white rounded-lg resize-none h-[250px] placeholder:text-white/60" 
                     />
                 </div>
                 
-                <button className="w-full py-2 bg-white text-black font-bold rounded-lg hover:bg-zinc-200 transition-colors uppercase tracking-widest mt-4 text-xs">
-                    {t(`talk.fields.SendMessage`)}
+                <button className="w-full py-2 bg-white text-black font-bold rounded-lg hover:bg-zinc-200 transition-colors uppercase tracking-widest mt-4 text-xs flex items-center justify-center gap-2 shadow-paper">
+                    {t(`talk.fields.SendMessage`)} 
+                    <FaRegPaperPlane className="text-base" />
                 </button>
             </div>
         </div>
