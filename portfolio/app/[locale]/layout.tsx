@@ -1,6 +1,6 @@
 import Provider from "@/components/providers/IntlProvider";
 import Navbar from "@/components/ui/navbar";
-import TabTitleEffect from "@/components/TabTitleEffect";
+import TabTitleEffect from "@/components/ui/TabTitleEffect";
 import { getMessages } from "next-intl/server";
 import SilkBg from "@/components/ui/silk";
 

@@ -2,6 +2,7 @@ import Hero from "@/components/ui/hero";
 import SilkBg from "@/components/ui/silk";
 import Skills from "@/components/ui/skills";
 import LogoLoop from "@/components/ui/LogoLoop";
+import HorizontalScrollShowcase from "@/components/ui/HorizontalScrollShowcase";
 import { techLogos as baseTechLogos } from "@/data/techLogos";
 import { iconMap } from "@/data/iconMap";
 
@@ -32,6 +33,10 @@ export default function Home() {
             direction="left"
             logoHeight={60}
           />
+        </div>
+        <div>
+          <HorizontalScrollShowcase />
+
         </div>
       </main>
     </>
