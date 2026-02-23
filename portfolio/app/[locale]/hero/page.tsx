@@ -13,32 +13,28 @@ const techLogos = baseTechLogos.map(item => ({
 
 export default function Home() {
   return (
-    <>
-
-      <main
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          justifyContent: "center",
-          gap: "20px",
-        }}
-      >
-        <Hero />
+    <main className="w-full bg-[#111111]">
+      <Hero />
+      
+      {/* Use standard spacing instead of Flex gap */}
+      <div className="py-20"> 
         <Skills />
-        <div style={{ height: '100px', width: '100%', margin: '0 auto', position: 'relative', overflow: 'hidden', scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-          <LogoLoop
-            logos={techLogos}
-            speed={100}
-            direction="left"
-            logoHeight={60}
-          />
-        </div>
-        <div>
-          <HorizontalScrollShowcase />
+      </div>
 
-        </div>
-      </main>
-    </>
+      <div className="h-[100px] w-full relative overflow-hidden my-10">
+        <LogoLoop
+          logos={techLogos}
+          speed={100}
+          direction="left"
+          logoHeight={60}
+        />
+      </div>
+
+      {/* This component needs a "clean" parent to pin correctly */}
+      <HorizontalScrollShowcase />
+      
+      {/* Add a footer or extra space to see the end of the scroll */}
+      <div className="h-screen" />
+    </main>
   );
 }
