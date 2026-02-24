@@ -1,104 +1,41 @@
 "use client";
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import type { JSX } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { FaReact } from 'react-icons/fa';
+import { SiNextdotjs, SiMui, SiMysql, SiMinio, SiAmazon, SiDotnet, SiPython, SiJavascript, SiTypescript, SiDocker, SiSharp, SiSqlite, SiNodedotjs } from 'react-icons/si';
+import { MdDescription } from 'react-icons/md';
+import { TbBrandReactNative } from 'react-icons/tb';
+import { RiTranslate2 } from 'react-icons/ri';
+import { sectionsData } from "@/data/sectionsData";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-// --- DATA STRUCTURE ---
-const sectionsData = [
-  {
-    id: 1,
-    category: "THE FRONT END",
-    mainTitle: "All about the UI and client logic. Take a closer look at how I approached the front end with real production code snippets.",
-    techIcons: ["React", "Clerk", "TailwindCSS"], // Replace with actual SVGs later
-    tabs: [
-      {
-        id: "custom-hooks",
-        label: "Custom Hooks",
-        description: "In this snippet, I've created a custom hook that fetches a film/tv Review data. This encapsulates the fetch logic and all of its related code like refetch and fetchMore for cursor based fetching which separates concerns from the rest of the parent component.",
-        codeSnippet: (
-          <pre className="text-sm font-mono leading-relaxed">
-            <span className="text-[#c678dd]">export const</span> <span className="text-[#61afef]">useFetchReview</span> = (<span className="text-[#e06c75]">reviewId</span>, <span className="text-[#e06c75]">replyCommentId</span>) <span className="text-[#c678dd]">=&gt;</span> {'{\n'}
-            {'  '}<span className="text-[#c678dd]">const</span> [ review, setReview ] = <span className="text-[#56b6c2]">useState</span>(<span className="text-[#98c379]">''</span>){'\n'}
-            {'  '}<span className="text-[#c678dd]">const</span> {'{'} user : clerkUser {'}'} = <span className="text-[#56b6c2]">useUser</span>(){'\n'}
-            {'  '}<span className="text-[#c678dd]">const</span> {'{'} data : ownerUser, refetch : refetchOwner {'}'} = {'\n'}
-            <span className="text-[#56b6c2]">useFetchOwnerUser</span>({'{'}<span className="text-[#d19a66]">email</span>:clerkUser.emailAddresses[<span className="text-[#d19a66]">0</span>].emailAddress{'}'}){'\n'}
-            {'  '}<span className="text-[#c678dd]">const</span> [ isLoading, setIsLoading ] = <span className="text-[#56b6c2]">useState</span>(<span className="text-[#d19a66]">true</span>){'\n'}
-            {'  '}<span className="text-[#c678dd]">const</span> [ error, setError ] = <span className="text-[#56b6c2]">useState</span>(<span className="text-[#d19a66]">null</span>){'\n'}
-            {'  '}<span className="text-[#c678dd]">const</span> [ interactedComments, setInteractedComments ] = <span className="text-[#56b6c2]">useState</span>({'{\n'}
-            {'      '}<span className="text-[#d19a66]">upvotes</span> : [],
-          </pre>
-        )
-      },
-      {
-        id: "infinite-scrolling",
-        label: "Infinite Scrolling",
-        description: "Implementing infinite scrolling using Intersection Observer and React Query to dynamically load content as the user reaches the bottom of the feed.",
-        codeSnippet: <pre className="text-sm font-mono text-gray-400">// Infinite Scrolling snippet here...</pre>
-      },
-      {
-        id: "optimistic-ui",
-        label: "Comment Interactions & Optimistic UI Updates",
-        description: "Providing instant feedback by updating the UI immediately when a user likes or comments, syncing with the server in the background.",
-        codeSnippet: <pre className="text-sm font-mono text-gray-400">// Optimistic UI snippet here...</pre>
-      },
-      {
-        id: "global-state",
-        label: "Global State Management with useContext",
-        description: "Using React's Context API to manage global application state, avoiding prop drilling for themes, user sessions, and modals.",
-        codeSnippet: <pre className="text-sm font-mono text-gray-400">// Global State snippet here...</pre>
-      }
-    ]
-  },
-  {
-    id: 2,
-    category: "THE BACK END",
-    mainTitle: "A robust backend is needed to support the front end. Here are snippets from my production server code.",
-    techIcons: ["Node.js", "PostgreSQL", "AWS", "Docker"], // Replace with actual SVGs later
-    tabs: [
-      {
-        id: "cursor-pagination",
-        label: "Cursor Based Pagination for Infinite Scrolling",
-        description: "Using Prisma ORM with PostgreSQL, I'm using cursor based pagination so I dont fetch repeated data for the infinite scrolling feature in the front end. This is accomplished by using the id of the final item fetched and using that as a cursor with skipping the first element to avoid repeats.",
-        codeSnippet: (
-          <pre className="text-sm font-mono leading-relaxed">
-            <span className="text-[#61afef]">ListRouter</span>.<span className="text-[#56b6c2]">get</span>(<span className="text-[#98c379]">'/infinite'</span>, <span className="text-[#c678dd]">async</span> (req,res) <span className="text-[#c678dd]">=&gt;</span> {'{\n'}
-            {'  '}<span className="text-[#c678dd]">const</span> {'{'} limit, userId, cursor {'}'} = req.query{'\n\n'}
-            {'  '}<span className="text-[#c678dd]">try</span> {'{\n'}
-            {'    '}<span className="text-[#c678dd]">const</span> listParams = {'{\n'}
-            {'      '}where : {'{\n'}
-            {'        '}userId : <span className="text-[#56b6c2]">Number</span>(userId),{'\n'}
-            {'      '}{'}'},{'\n'}
-            {'      '}orderBy : {'{\n'}
-            {'        '}createdAt : <span className="text-[#98c379]">'desc'</span>
-          </pre>
-        )
-      },
-      {
-        id: "redis",
-        label: "In Memory Store Caching with Redis",
-        description: "Implementing Redis to cache heavy database queries and session data, significantly reducing latency and server load.",
-        codeSnippet: <pre className="text-sm font-mono text-gray-400">// Redis caching snippet here...</pre>
-      },
-      {
-        id: "aws-s3",
-        label: "AWS S3 to Store User Uploaded Media with a CDN",
-        description: "Generating secure pre-signed URLs on the server to allow clients to upload images directly to S3 buckets, served via CloudFront CDN.",
-        codeSnippet: <pre className="text-sm font-mono text-gray-400">// AWS S3 snippet here...</pre>
-      },
-      {
-        id: "parsing",
-        label: "Parsing Text to Extract a URL Preview Thumbnail",
-        description: "A server-side utility that parses user comments for URLs, scrapes the target metadata, and generates link preview thumbnails.",
-        codeSnippet: <pre className="text-sm font-mono text-gray-400">// URL parsing snippet here...</pre>
-      }
-    ]
-  }
-];
+const techIconsMap: Record<string, JSX.Element> = {
+  React: <FaReact className="text-cyan-400" size={32} title="React" />,
+  Nextjs: <SiNextdotjs className="text-white" size={32} title="Next.js" />,
+  'Next.js': <SiNextdotjs className="text-white" size={32} title="Next.js" />,
+  'React Native': <TbBrandReactNative className="text-cyan-300" size={32} title="React Native" />,
+  'Material UI': <SiMui className="text-blue-400" size={32} title="Material UI" />,
+  Thesis: <MdDescription className="text-white" size={32} title="Thesis" />,
+  MySQL: <SiMysql className="text-blue-300" size={32} title="MySQL" />,
+  MinIO: <SiMinio className="text-red-400" size={32} title="MinIO" />,
+  'LibreTranslate': <RiTranslate2 className="text-green-300" size={32} title="LibreTranslate" />,
+  AWS: <SiAmazon className="text-yellow-400" size={32} title="AWS" />,
+  'ASP.NET': <SiDotnet className="text-blue-500" size={32} title="ASP.NET" />,
+  Python: <SiPython className="text-yellow-300" size={32} title="Python" />,
+  JavaScript: <SiJavascript className="text-yellow-400" size={32} title="JavaScript" />,
+  TypeScript: <SiTypescript className="text-blue-400" size={32} title="TypeScript" />,
+  Docker: <SiDocker className="text-blue-300" size={32} title="Docker" />,
+  CSharp: <SiSharp className="text-blue-500" size={32} title="C#" />,
+  SQL: <SiSqlite className="text-blue-400" size={32} title="SQL" />,
+  NodeJS: <SiNodedotjs className="text-green-400" size={32} title="Node.js" />,
+  // Disney: <FaDisney className="text-blue-300" size={32} title="Disney+" />,
+};
 
 export default function HorizontalScrollShowcase() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -140,55 +77,102 @@ export default function HorizontalScrollShowcase() {
   }, { scope: triggerRef });
 
   return (
-    /* The outer div acts as the trigger. 
-       We set w-full to prevent the parent's 'align-items: center' 
-       from shrinking the pin-spacer. 
-    */
-    <div ref={triggerRef} className="w-full bg-[#111111] overflow-hidden">
+    <div ref={triggerRef} className="w-full bg-white/10 backdrop-blur-lg overflow-hidden">
       <div 
         ref={containerRef} 
         className="flex flex-nowrap h-screen will-change-transform"
-        style={{ width: `${sectionsData.length * 100}vw` }}
+        style={{ width: `${sectionsData.length * 100 + 100}vw` }}
       >
-        {sectionsData.map((section) => {
+        {sectionsData.map((section, idx) => {
           const activeTab = section.tabs.find(tab => tab.id === activeTabs[section.id]) || section.tabs[0];
-
           return (
             <section 
               key={section.id} 
               className="w-screen h-screen flex flex-col justify-center px-8 md:px-[10vw] flex-shrink-0"
             >
               <div className="max-w-6xl mx-auto w-full">
-                {/* ... (Your Content: Category, Title, Tabs, Code Snippet) ... */}
-                <h4 className="text-[#3b82f6] text-xs font-bold tracking-[0.3em] uppercase mb-6">
+                <h4 className="text-white text-xs font-bold tracking-[0.3em] uppercase mb-6">
                   {section.category}
                 </h4>
-                <h2 className="text-2xl md:text-[2.5rem] font-medium text-[#e5e7eb] mb-8">
+                <h2 className="text-2xl md:text-[2.5rem] font-medium text-white mb-8">
                   {section.mainTitle}
                 </h2>
-                
+                {/* Tech Icons Row */}
+                <div className="flex gap-6 mb-10 items-center">
+                  {section.id === 1 ? (
+                    <>
+                      {techIconsMap.React}
+                      {techIconsMap['Next.js']}
+                      {techIconsMap['React Native']}
+                      {techIconsMap['Material UI']}
+                      {techIconsMap.Thesis}
+                    </>
+                  ) : (
+                    <>
+                      {techIconsMap.MySQL}
+                      {techIconsMap.MinIO}
+                      {techIconsMap['LibreTranslate']}
+                      {techIconsMap.AWS}
+                      {techIconsMap['ASP.NET']}
+                    </>
+                  )}
+                </div>
                 {/* Tabs & Code Window as per your original code */}
                 <div className="flex flex-wrap gap-3 mb-8">
                   {section.tabs.map((tab) => (
                     <button
                       key={tab.id}
                       onClick={() => handleTabClick(section.id, tab.id)}
-                      className={`rounded-full px-5 py-2 text-sm border ${
-                        activeTabs[section.id] === tab.id ? 'bg-white text-black' : 'text-gray-400 border-white/20'
+                      className={`rounded-full px-5 py-2 text-sm border transition-all duration-300 ${
+                        activeTabs[section.id] === tab.id ? 'bg-white text-black border-white font-medium' : 'text-white border-white/20 hover:border-white/50'
                       }`}
                     >
                       {tab.label}
                     </button>
                   ))}
                 </div>
-
-                <div className="bg-[#1a1a1a] rounded-xl border border-white/10 p-6 overflow-hidden">
+                <p className="text-white text-base leading-relaxed max-w-5xl mb-12 min-h-[60px]">
+                  {activeTab.description}
+                </p>
+                <div className="bg-white/10 backdrop-blur-md rounded-xl border border-white/10 p-6 overflow-hidden">
                   {activeTab.codeSnippet}
                 </div>
               </div>
             </section>
           );
         })}
+        {/* Education Section */}
+        <section className="w-screen h-screen flex flex-col md:flex-row items-center justify-center px-8 md:px-[10vw] flex-shrink-0">
+          {/* Left: Slideshow */}
+          <div className="w-full md:w-1/2 flex items-center justify-center mb-8 md:mb-0">
+            <div className="w-[320px] h-[320px] bg-white/20 rounded-xl flex items-center justify-center overflow-hidden relative">
+              {/* Placeholder for slideshow - replace with your own carousel */}
+              <span className="text-white text-lg">STEP Academy Slideshow<br/>[10 images]</span>
+            </div>
+          </div>
+          {/* Right: Carousel Text & Tech Stack */}
+          <div className="w-full md:w-1/2 flex flex-col items-center md:items-start">
+            <div className="bg-white/10 backdrop-blur-md rounded-xl border border-white/10 p-6 mb-8 w-full max-w-lg">
+              {/* Placeholder for carousel text */}
+              <span className="text-white">Carousel Text: Replace with your own thoughts...</span>
+            </div>
+            <div className="flex flex-wrap gap-4 mt-4">
+              {/* {techIconsMap.Disney} */}
+              {techIconsMap.CSharp}
+              {techIconsMap.Python}
+              {techIconsMap.SQL}
+              {techIconsMap.AWS}
+              {techIconsMap.Docker}
+              {techIconsMap.Nextjs}
+              {techIconsMap.NodeJS}
+              {techIconsMap.JavaScript}
+              {techIconsMap.TypeScript}
+              {techIconsMap.React}
+              {techIconsMap['React Native']}
+              {techIconsMap['ASP.NET']}
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

@@ -30,10 +30,8 @@ export default function Home() {
         />
       </div>
 
-      {/* This component needs a "clean" parent to pin correctly */}
       <HorizontalScrollShowcase />
       
-      {/* Add a footer or extra space to see the end of the scroll */}
       <div className="h-screen" />
     </main>
   );
