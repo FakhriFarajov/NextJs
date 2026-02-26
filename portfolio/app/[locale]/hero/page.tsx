@@ -13,7 +13,7 @@ const techLogos = baseTechLogos.map(item => ({
 
 export default function Home() {
   return (
-    <main className="w-full bg-[#111111]">
+    <main className="w-full">
       <Hero />
       
       {/* Use standard spacing instead of Flex gap */}

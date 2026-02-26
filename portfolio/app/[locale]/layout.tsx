@@ -1,4 +1,4 @@
-import Provider from "@/components/providers/IntlProvider";
+import Provider from "@/providers/IntlProvider";
 import Navbar from "@/components/ui/navbar";
 import TabTitleEffect from "@/components/ui/TabTitleEffect";
 import { getMessages } from "next-intl/server";

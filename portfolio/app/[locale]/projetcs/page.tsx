@@ -4,13 +4,46 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 
 if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(ScrollTrigger);
 }
+
+
+const projects = [
+    {
+        id: 1,
+        titles: [{
+            en: "Shah Marketplace",
+            ru: "Шах Маркетплейс",
+            az: "Şah Marketpleys"
+        }],
+        description: [{
+            en: "A full-stack e-commerce platform built with Next.js, Node.js, Express, PostgreSQL, and Clerk Authentication. Features include product listings, user authentication, shopping cart, and order management.",
+            ru: "Полноценная платформа электронной коммерции, построенная с использованием Next.js, Node.js, Express, PostgreSQL и Clerk Authentication. Функции включают списки продуктов, аутентификацию пользователей, корзину покупок и управление заказами.",
+            az: "Next.js, Node.js, Express, PostgreSQL və Clerk Authentication ilə qurulmuş tam yığın e-ticarət platforması. Xüsusiyyətlərə məhsul listeleri, istifadəçi doğrulaması, alışveriş sepeti ve sipariş yönetimi dahildir."
+        }],
+        role: [{
+            en: "Lead Developer",
+            ru: "Ведущий разработчик",
+            az: "Baş İnkişaf etdirici"
+        }],
+        techStack: ["Next.js", "Node.js", "Express", "PostgreSQL", "Clerk Authentication"],
+        images: [{
+            src: "/images/projects/shah-marketplace.png",
+            alt: "Shah Marketplace"
+        },
+        {
+            src: "/images/projects/shah-marketplace-2.png",
+            alt: "Shah Marketplace - Product Page"
+        }]
+    }
+]
+
+
 
 export default function HorizontalPortfolio() {
     const sectionRef = useRef(null);
     const triggerRef = useRef(null);
-    
+
     // State to handle the "click to show info" requirement
     const [activeDetail, setActiveDetail] = useState("Click a category above to see details");
 
@@ -54,16 +87,16 @@ export default function HorizontalPortfolio() {
 
             {/* GSAP Section */}
             <div ref={triggerRef} className="overflow-hidden">
-                <div 
-                    ref={sectionRef} 
+                <div
+                    ref={sectionRef}
                     className="flex flex-nowrap w-[400vw] h-screen items-center relative"
                 >
                     {data.map((item) => (
-                        <div 
-                            key={item.id} 
+                        <div
+                            key={item.id}
                             className="w-[100vw] h-full flex items-center justify-center px-10"
                         >
-                            <h2 
+                            <h2
                                 onClick={() => setActiveDetail(item.detail)}
                                 className="cursor-pointer text-[12vw] font-black uppercase leading-none hover:text-[#e10600] transition-colors duration-300"
                             >
