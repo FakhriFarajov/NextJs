@@ -1,5 +1,4 @@
 import Hero from "@/components/ui/hero";
-import SilkBg from "@/components/ui/silk";
 import Skills from "@/components/ui/skills";
 import LogoLoop from "@/components/ui/LogoLoop";
 import HorizontalScrollShowcase from "@/components/ui/HorizontalScrollShowcase";

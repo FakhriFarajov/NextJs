@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import  createIntlMiddleware  from "next-intl/middleware";
 
 
-const authPages = ["/auth/signin"]
+const authPages = ["/auth/sign-in"]
 const protectedPages = ["/dashboard"]
 
 const intlMiddleware = createIntlMiddleware({
@@ -24,7 +24,7 @@ export default async function proxy(req: NextRequest) {
     })
 
     // If user is logged in but not authorized, redirect to home (only for protected pages)
-    if (session?.email && session.email !== "azer.kazimov@yahoo.com" && isProtectedPage) {
+    if (session?.email && session.email !== "fakhri_farajov@mail.ru" && isProtectedPage) {
         return NextResponse.redirect(new URL("/", req.url));
     }
 
