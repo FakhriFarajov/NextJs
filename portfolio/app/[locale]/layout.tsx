@@ -14,7 +14,7 @@ interface LocaleLayoutProps {
 export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
   const { locale } = params;
   const messages = await getMessages({ locale });
-
+  
   return (
     <Provider messages={messages}>
       <div
@@ -35,7 +35,6 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
           rotation={0}
         />
       </div>
-      <TabTitleEffect />
       <Navbar />
       {children}
     </Provider>

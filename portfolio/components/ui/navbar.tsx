@@ -12,12 +12,14 @@ export default function Navbar() {
   const pathname = usePathname();
   const t = useTranslations();
 
-  const links = navLinks.map((link) => ({
-    ...link,
-    label: t(link.labelKey),
-  }));
+  // 1. Check if the current route is part of the dashboard
+  const isDashboard = pathname?.includes("/dashboard");
 
+  // 2. Add the scroll effect logic
   useEffect(() => {
+    // If it's the dashboard, don't bother setting up scroll listeners
+    if (isDashboard) return;
+
     const handleScroll = () => {
       if (!navRef.current) return;
       if (window.scrollY > 10) {
@@ -38,7 +40,17 @@ export default function Navbar() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isDashboard]);
+
+  // 3. If it is the dashboard, return null to hide the navbar
+  if (isDashboard) {
+    return null;
+  }
+
+  const links = navLinks.map((link) => ({
+    ...link,
+    label: t(link.labelKey),
+  }));
 
   return (
     <nav
