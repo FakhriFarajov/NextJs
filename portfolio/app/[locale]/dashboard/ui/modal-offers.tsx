@@ -8,15 +8,16 @@ import {
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-
-const statuses = [
-    { key: 'new', label: 'New' },
-    { key: 'interview', label: 'Interview' },
-    { key: 'declined', label: 'Declined' },
-    { key: 'hired', label: 'Hired' },
-];
+import { useTranslations } from "next-intl";
 
 export function OfferDetailModal({ offer, isOpen, onOpenChange }: any) {
+    const t = useTranslations();
+    const statuses = [
+        { key: 'new', label: t('dashboard.modalOffers.status_new') },
+        { key: 'interview', label: t('dashboard.modalOffers.status_interview') },
+        { key: 'declined', label: t('dashboard.modalOffers.status_declined') },
+        { key: 'hired', label: t('dashboard.modalOffers.status_hired') },
+    ];
     const [selected, setSelected] = React.useState('new');
     const buttonRefs = React.useRef<(HTMLButtonElement | null)[]>([]);
     const indicatorRef = React.useRef<HTMLDivElement | null>(null);
@@ -50,10 +51,10 @@ export function OfferDetailModal({ offer, isOpen, onOpenChange }: any) {
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
             <DialogContent className="max-w-xl border-none bg-card shadow-2xl">
                 <DialogHeader className="space-y-1">
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">Job Proposal</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">{t("dashboard.modalOffers.jobProposal")}</span>
                     <DialogTitle className="text-2xl font-bold">{offer.name}</DialogTitle>
                     <DialogDescription className="text-xs text-muted-foreground font-medium">
-                        Sent from {offer.company} • {offer.email}
+                        {t("dashboard.modalOffers.sentFrom", { company: offer.company, email: offer.email })}
                     </DialogDescription>
                 </DialogHeader>
 
@@ -77,7 +78,7 @@ export function OfferDetailModal({ offer, isOpen, onOpenChange }: any) {
 
                 <div className="space-y-6 py-2">
                     <div className="rounded-2xl bg-muted/30 p-5 border border-dashed border-primary/20">
-                        <Label className="text-[10px] uppercase font-bold text-primary tracking-tighter mb-2 block">Client Message</Label>
+                        <Label className="text-[10px] uppercase font-bold text-primary tracking-tighter mb-2 block">{t("dashboard.modalOffers.clientMessage")}</Label>
                         <p className="text-sm leading-relaxed text-foreground/90 whitespace-pre-wrap">
                             "{offer.message}"
                         </p>
@@ -85,11 +86,11 @@ export function OfferDetailModal({ offer, isOpen, onOpenChange }: any) {
 
                     <div className="grid grid-cols-2 gap-8 px-2">
                         <div className="space-y-1">
-                            <Label className="text-[10px] uppercase font-bold text-muted-foreground">Preferred Engagement</Label>
+                            <Label className="text-[10px] uppercase font-bold text-muted-foreground">{t("dashboard.modalOffers.preferredEngagement")}</Label>
                             <p className="text-sm font-semibold">{offer.type}</p>
                         </div>
                         <div className="space-y-1 text-right">
-                            <Label className="text-[10px] uppercase font-bold text-muted-foreground">Received On</Label>
+                            <Label className="text-[10px] uppercase font-bold text-muted-foreground">{t("dashboard.modalOffers.receivedOn")}</Label>
                             <p className="text-sm font-semibold">{offer.date}</p>
                         </div>
                     </div>
@@ -99,14 +100,14 @@ export function OfferDetailModal({ offer, isOpen, onOpenChange }: any) {
 
                 <DialogFooter className="flex gap-2 sm:justify-between pt-2">
                     <Button variant="ghost" className="text-destructive hover:bg-destructive/10 text-xs font-bold uppercase" onClick={() => onOpenChange(false)}>
-                        Archive
+                        {t("dashboard.modalOffers.archive")}
                     </Button>
                     <div className="flex gap-2">
-                        <Button variant="outline" className="text-xs font-bold uppercase" onClick={() => window.location.href = `mailto:${offer.email}`}>
-                            Reply via Mail
+                        <Button variant="outline" className="text-xs font-bold uppercase" onClick={() => window.location.href = `mailto:${offer.email}`}> 
+                            {t("dashboard.modalOffers.replyMail")}
                         </Button>
                         <Button className="text-xs font-bold uppercase px-8">
-                            Update Status
+                            {t("dashboard.modalOffers.updateStatus")}
                         </Button>
                     </div>
                 </DialogFooter>

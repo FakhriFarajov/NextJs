@@ -7,6 +7,7 @@ import {
   MessageSquare,
   ChevronRight 
 } from "lucide-react"
+import { useTranslations } from "next-intl";
 
 import {
   Sidebar,
@@ -27,7 +28,7 @@ const data = {
   },
   navMain: [
     {
-      title: "Dashboard",
+      title: "Main",
       url: "/dashboard/main",
       icon: LayoutDashboard,
       description: "Statistics & Overview",
@@ -51,6 +52,7 @@ const data = {
 }
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const t = useTranslations();
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -62,7 +64,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                   <GalleryVerticalEnd className="size-4" />
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">Portfolio Admin</span>
+                  <span className="font-semibold">{t("dashboard.sidebar.admin")}</span>
                 </div>
               </a>
             </SidebarMenuButton>
@@ -74,11 +76,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           <SidebarMenu>
             {data.navMain.map((item) => (
               <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton asChild tooltip={item.title} className="py-6">
+                <SidebarMenuButton asChild tooltip={t(`dashboard.sidebar.${item.title.toLowerCase().replace(/\s+/g, "_")}`)} className="py-6">
                   <a href={item.url} className="flex items-center gap-3">
                     <item.icon className="size-5" />
                     <div className="flex flex-col">
-                      <span className="font-medium">{item.title}</span>
+                      <span className="font-medium">{t(`dashboard.sidebar.${item.title.toLowerCase().replace(/\s+/g, "_")}`)}</span>
                     </div>
                     <ChevronRight className="ml-auto size-4 opacity-50" />
                   </a>

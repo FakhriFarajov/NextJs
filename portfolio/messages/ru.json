@@ -59,5 +59,149 @@
     "default": "Fakhri Farajov Portfolio",
     "comeBack": "Вернитесь!",
     "welcomeBack": "С возвращением!"
+  },
+  "dashboard": {
+    "main": {
+      "overview": "Обзор",
+      "totalProjects": "Всего проектов",
+      "projectsGrowth": "+12% по сравнению с прошлым месяцем",
+      "clientReviews": "Отзывы клиентов",
+      "reviewsBasedOn": "Основано на 128 отзывах",
+      "newMessages": "Новые сообщения",
+      "viewAllInquiries": "Посмотреть все запросы",
+      "recentActivityTitle": "Последние проекты",
+      "recentActivityDesc": "Подробный обзор ваших последних добавлений в портфолио.",
+      "projectTitle": "Название проекта Альфа {number}",
+      "projectUpdated": "Обновлено 2 часа назад",
+      "projectStatus": "Активен"
+    },
+    "sidebar": {
+      "admin": "Админ портфолио",
+      "main": "Главная",
+      "project_management": "Управление проектами",
+      "review_management": "Управление отзывами",
+      "offers": "Предложения"
+    },
+    "offers": {
+      "title": "Рабочие предложения",
+      "incoming": "Новые возможности",
+      "desc": "Прямые запросы из вашей формы 'Talk'.",
+      "viewDetails": "Подробнее",
+      "delete": "Удалить",
+      "deleteConfirmTitle": "Вы уверены?",
+      "deleteConfirmDesc": "Это действие нельзя отменить. Вы хотите удалить это предложение?",
+      "cancel": "Отмена",
+      "confirmDelete": "Удалить",
+      "status_new": "Новое",
+      "status_interview": "Интервью",
+      "status_declined": "Отклонено",
+      "status_hired": "Нанят",
+      "jobProposal": "Предложение о работе",
+      "sentFrom": "Отправлено из {company} • {email}",
+      "clientMessage": "Сообщение клиента",
+      "preferredEngagement": "Предпочтительный формат",
+      "receivedOn": "Получено",
+      "archive": "Архивировать",
+      "replyMail": "Ответить по почте",
+      "updateStatus": "Обновить статус"
+    },
+    "projects": {
+      "add": "Добавить проект",
+      "title": "Проекты",
+      "total": "Всего проектов",
+      "edit": "Редактировать",
+      "delete": "Удалить",
+      "projectTitle": "Проект №{number}",
+      "builtWith": "Сделано с помощью",
+      "languages": "Языки",
+      "showing": "Показаны",
+      "to": "по",
+      "of": "из",
+      "results": "результатов"
+    },
+    "reviews": {
+      "title": "Управление отзывами",
+      "heading": "Отзывы клиентов",
+      "desc": "Управляйте отзывами, отображаемыми в вашем портфолио.",
+      "add": "Добавить отзыв",
+      "name": "Имя Фамилия",
+      "roleCompany": "Должность @ Компания",
+      "description": "Это пример описания опыта клиента работы с вами..."
+    },
+    "modalProjects": {
+      "title": "Детали проекта",
+      "tabs": {
+        "az": "Азербайджанский",
+        "ru": "Русский",
+        "en": "Английский"
+      },
+      "fields": {
+        "title": "Название проекта ({lang})",
+        "description": "Описание ({lang})",
+        "role": "Роль ({lang})",
+        "tools": "Инструменты и технологии (только на английском)",
+        "projectLink": "Ссылка на проект",
+        "github": "Репозиторий GitHub",
+        "images": "Изображения проекта"
+      },
+      "placeholders": {
+        "title": "Введите название...",
+        "description": "Опишите проект...",
+        "role": "например, ведущий разработчик",
+        "tools": "Введите инструмент и нажмите Enter",
+        "projectLink": "https://...",
+        "github": "https://github.com/..."
+      },
+      "actions": {
+        "upload": "Загрузить",
+        "save": "Сохранить проект"
+      }
+    },
+    "modalOffers": {
+      "status_new": "Новый",
+      "status_interview": "Собеседование",
+      "status_declined": "Отклонено",
+      "status_hired": "Принят",
+      "jobProposal": "Предложение работы",
+      "sentFrom": "Отправлено из {company} ({email})",
+      "clientMessage": "Сообщение клиента",
+      "preferredEngagement": "Предпочтительный формат",
+      "receivedOn": "Получено",
+      "archive": "Архивировать",
+      "replyMail": "Ответить по почте",
+      "updateStatus": "Обновить статус"
+    },
+    "modalReviews": {
+      "editTitle": "Редактировать отзыв",
+      "addTitle": "Добавить новый отзыв",
+      "fields": {
+        "profilePicture": "Фото профиля",
+        "name": "Имя",
+        "surname": "Фамилия",
+        "email": "Email",
+        "role": "Роль",
+        "company": "Компания",
+        "description": "Описание отзыва"
+      },
+      "placeholders": {
+        "name": "Иван",
+        "surname": "Иванов",
+        "email": "ivan@example.com",
+        "role": "Генеральный директор / Менеджер",
+        "company": "Tech Solutions Inc.",
+        "description": "Напишите отзыв здесь..."
+      },
+      "actions": {
+        "cancel": "Отмена",
+        "save": "Сохранить отзыв",
+        "update": "Обновить отзыв"
+      }
+    },
+    "modalDelete": {
+      "title": "Удалить проект",
+      "areYouSure": "Вы уверены, что хотите удалить этот проект?",
+      "cancel": "Отмена",
+      "confirmDelete": "Удалить проект"
+    }    
   }
 }

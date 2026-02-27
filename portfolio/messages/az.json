@@ -59,5 +59,137 @@
     "default": "Fakhri Farajov Portfolio",
     "comeBack": "Qayıdın!",
     "welcomeBack": "Xoş gəldiniz!"
+  },
+  "dashboard": {
+    "main": {
+      "overview": "İcmal",
+      "totalProjects": "Ümumi layihələr",
+      "projectsGrowth": "Keçən aydan +12%",
+      "clientReviews": "Müştəri rəyləri",
+      "reviewsBasedOn": "128 rəylə əsaslanır",
+      "newMessages": "Yeni mesajlar",
+      "viewAllInquiries": "Bütün sorğulara bax",
+      "recentActivityTitle": "Son layihə fəaliyyəti",
+      "recentActivityDesc": "Portfelinizə əlavə etdiyiniz son layihələrə ətraflı baxış.",
+      "projectTitle": "Layihə adı Alfa {number}",
+      "projectUpdated": "2 saat əvvəl yeniləndi",
+      "projectStatus": "Aktiv"
+    },
+    "sidebar": {
+      "admin": "Portfel Administratoru",
+      "main": "Ana shəhifə",
+      "project_management": "Layihə İdarəetməsi",
+      "review_management": "Rəy İdarəetməsi",
+      "offers": "Təkliflər"
+    },
+    "offers": {
+      "title": "İş Təklifləri",
+      "incoming": "Gələn imkanlar",
+      "desc": "'Talk' formunuzdan birbaşa sorğular.",
+      "viewDetails": "Ətraflı bax",
+      "delete": "Sil",
+      "deleteConfirmTitle": "Əminsiniz?",
+      "deleteConfirmDesc": "Bu əməliyyatı geri qaytarmaq mümkün deyil. Bu təklifi silmək istəyirsiniz?",
+      "cancel": "İmtina",
+      "confirmDelete": "Sil"
+    },
+    "projects": {
+      "add": "Layihə əlavə et",
+      "title": "Layihələr",
+      "total": "Ümumi layihələr",
+      "edit": "Redaktə et",
+      "delete": "Sil",
+      "projectTitle": "Layihə #{number}",
+      "builtWith": "Hazırlanıb",
+      "languages": "Dillər",
+      "showing": "Göstərilir",
+      "to": "-",
+      "of": "-dan",
+      "results": "nəticə"
+    },
+    "reviews": {
+      "title": "Rəy İdarəetməsi",
+      "heading": "Müştəri Rəyləri",
+      "desc": "Portfelinizdə göstərilən rəyləri idarə edin.",
+      "add": "Rəy əlavə et",
+      "name": "Ad Soyad",
+      "roleCompany": "Vəzifə @ Şirkət",
+      "description": "Bu, müştərinin sizinlə işləmə təcrübəsinin nümunə təsviridir..."
+    },
+    "modalProjects": {
+      "title": "Layihə Detalları",
+      "tabs": {
+        "az": "Azərbaycan dili",
+        "ru": "Rus dili",
+        "en": "İngilis dili"
+      },
+      "fields": {
+        "title": "Layihə Başlığı ({lang})",
+        "description": "Təsvir ({lang})",
+        "role": "Rol ({lang})",
+        "tools": "Alətlər və Texnologiyalar (yalnız ingilis dili)",
+        "projectLink": "Layihə Linki",
+        "github": "GitHub Repozitoriyası",
+        "images": "Layihə Şəkilləri"
+      },
+      "placeholders": {
+        "title": "Başlığı daxil edin...",
+        "description": "Layihəni təsvir edin...",
+        "role": "məsələn, Baş Proqramçı",
+        "tools": "Aləti yazın və Enter basın",
+        "projectLink": "https://...",
+        "github": "https://github.com/..."
+      },
+      "actions": {
+        "upload": "Yüklə",
+        "save": "Layihəni Saxla"
+      }
+    },
+    "modalOffers": {
+      "status_new": "Yeni",
+      "status_interview": "Müsahibə",
+      "status_declined": "Rədd edildi",
+      "status_hired": "İşə qəbul edildi",
+      "jobProposal": "İş Təklifi",
+      "sentFrom": "{company} tərəfindən göndərildi ({email})",
+      "clientMessage": "Müştəri Mesajı",
+      "preferredEngagement": "Tövsiyə olunan əməkdaşlıq",
+      "receivedOn": "Alınma tarixi",
+      "archive": "Arxivləşdir",
+      "replyMail": "Mail ilə cavab ver",
+      "updateStatus": "Statusu Yenilə"
+    },
+    "modalReviews": {
+      "editTitle": "Rəyə düzəliş edin",
+      "addTitle": "Yeni rəy əlavə edin",
+      "fields": {
+        "profilePicture": "Profil şəkli",
+        "name": "Ad",
+        "surname": "Soyad",
+        "email": "Email",
+        "role": "Rol",
+        "company": "Şirkət",
+        "description": "Rəyin təsviri"
+      },
+      "placeholders": {
+        "name": "Cavid",
+        "surname": "Əliyev",
+        "email": "cavid@example.com",
+        "role": "CEO / Menecer",
+        "company": "Tech Solutions Inc.",
+        "description": "Rəyi burada yazın..."
+      },
+      "actions": {
+        "cancel": "Ləğv et",
+        "save": "Rəyi Saxla",
+        "update": "Rəyi Yenilə"
+      }
+    },
+    "modalDelete": {
+      "title": "Layihəni Sil",
+      "areYouSure": "Bu layihəni silmək istədiyinizə əminsiniz?",
+      "cancel": "Ləğv et",
+      "confirmDelete": "Layihəni Sil"
+    }
   }
 }

@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useState } from "react";
-import { AppSidebar } from "@/components/dashboard/ui/app-sidebar";
+import { AppSidebar } from "../ui/app-sidebar";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { Briefcase, Clock, CheckCircle2, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { OfferDetailModal } from "@/components/dashboard/ui/modal-offers";
+import { OfferDetailModal } from "../ui/modal-offers";
+import { useTranslations } from "next-intl";
 
 // Sample data mirroring your "Talk" form fields
 const offers = [
@@ -34,12 +35,20 @@ const offers = [
 ];
 
 export default function OffersPage() {
+    const t = useTranslations();
     const [selectedOffer, setSelectedOffer] = useState<any>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [deleteOffer, setDeleteOffer] = useState<any>(null);
+    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
     const handleViewDetails = (offer: any) => {
         setSelectedOffer(offer);
         setIsModalOpen(true);
+    };
+
+    const handleDeleteOffer = (offer: any) => {
+        setDeleteOffer(offer);
+        setIsDeleteModalOpen(true);
     };
 
     return (
@@ -49,13 +58,13 @@ export default function OffersPage() {
                 <header className="flex h-14 shrink-0 items-center gap-2 px-4 border-b">
                     <SidebarTrigger className="-ml-1" />
                     <Separator orientation="vertical" className="mr-2 h-4" />
-                    <h1 className="text-sm font-medium text-muted-foreground">Job Offers</h1>
+                    <h1 className="text-sm font-medium text-muted-foreground">{t("dashboard.offers.title")}</h1>
                 </header>
 
                 <div className="flex flex-1 flex-col p-6 pt-4">
                     <div className="mb-8">
-                        <h2 className="text-xl font-bold tracking-tight">Incoming Opportunities</h2>
-                        <p className="text-muted-foreground text-xs">Direct inquiries from your "Talk" form.</p>
+                        <h2 className="text-xl font-bold tracking-tight">{t("dashboard.offers.incoming")}</h2>
+                        <p className="text-muted-foreground text-xs">{t("dashboard.offers.desc")}</p>
                     </div>
 
                     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -84,12 +93,12 @@ export default function OffersPage() {
                                     </span>
                                 </div>
 
-                                <div className="mt-4">
+                                <div className="mt-4 flex gap-2">
                                     <Button 
                                         onClick={() => handleViewDetails(offer)}
                                         className="w-full h-8 text-[11px] font-bold uppercase tracking-tight bg-primary text-primary-foreground hover:opacity-90"
                                     >
-                                        View Details
+                                        {t("dashboard.offers.viewDetails")}
                                     </Button>
                                 </div>
                             </div>
@@ -103,6 +112,19 @@ export default function OffersPage() {
                     isOpen={isModalOpen} 
                     onOpenChange={setIsModalOpen} 
                 />
+                {/* Delete Confirmation Modal */}
+                {isDeleteModalOpen && (
+                    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+                        <div className="bg-white rounded-lg shadow-lg p-6 w-[320px]">
+                            <h2 className="text-lg font-bold mb-2">{t("dashboard.offers.deleteConfirmTitle")}</h2>
+                            <p className="text-sm text-muted-foreground mb-4">{t("dashboard.offers.deleteConfirmDesc")}</p>
+                            <div className="flex gap-2 justify-end">
+                                <Button variant="outline" onClick={() => setIsDeleteModalOpen(false)}>{t("dashboard.offers.cancel")}</Button>
+                                <Button variant="destructive" onClick={() => {/* delete logic here */ setIsDeleteModalOpen(false); setDeleteOffer(null); }}>{t("dashboard.offers.confirmDelete")}</Button>
+                            </div>
+                        </div>
+                    </div>
+                )}
             </SidebarInset>
         </SidebarProvider>
     );

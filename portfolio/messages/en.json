@@ -2,16 +2,56 @@
   "skills": {
     "title": "Personal Skills",
     "cards": [
-      { "label": "Communication", "title": "Clear communication opens every door.", "description": "Express ideas clearly and listen actively." },
-      { "label": "Teamwork", "title": "Together, we achieve more.", "description": "Collaborate effectively with others." },
-      { "label": "Critical Thinking", "title": "Question, analyze, improve.", "description": "Analyze situations and make informed decisions." },
-      { "label": "Problem-Solving", "title": "Every problem has a solution.", "description": "Find creative solutions to challenges." },
-      { "label": "Time Management", "title": "Make every minute count.", "description": "Prioritize tasks and meet deadlines." },
-      { "label": "Conflict Resolution", "title": "Turn conflict into opportunity.", "description": "Navigate disagreements constructively." },
-      { "label": "Flexibility", "title": "Change is a chance to grow.", "description": "Adapt to changing circumstances." },
-      { "label": "Decision-Making", "title": "Decide with confidence.", "description": "Choose the best course of action." },
-      { "label": "Reliability", "title": "Dependable in every task.", "description": "Consistently deliver quality work." },
-      { "label": "Multitasking", "title": "Balance many, master all.", "description": "Handle multiple responsibilities efficiently." }
+      {
+        "label": "Communication",
+        "title": "Clear communication opens every door.",
+        "description": "Express ideas clearly and listen actively."
+      },
+      {
+        "label": "Teamwork",
+        "title": "Together, we achieve more.",
+        "description": "Collaborate effectively with others."
+      },
+      {
+        "label": "Critical Thinking",
+        "title": "Question, analyze, improve.",
+        "description": "Analyze situations and make informed decisions."
+      },
+      {
+        "label": "Problem-Solving",
+        "title": "Every problem has a solution.",
+        "description": "Find creative solutions to challenges."
+      },
+      {
+        "label": "Time Management",
+        "title": "Make every minute count.",
+        "description": "Prioritize tasks and meet deadlines."
+      },
+      {
+        "label": "Conflict Resolution",
+        "title": "Turn conflict into opportunity.",
+        "description": "Navigate disagreements constructively."
+      },
+      {
+        "label": "Flexibility",
+        "title": "Change is a chance to grow.",
+        "description": "Adapt to changing circumstances."
+      },
+      {
+        "label": "Decision-Making",
+        "title": "Decide with confidence.",
+        "description": "Choose the best course of action."
+      },
+      {
+        "label": "Reliability",
+        "title": "Dependable in every task.",
+        "description": "Consistently deliver quality work."
+      },
+      {
+        "label": "Multitasking",
+        "title": "Balance many, master all.",
+        "description": "Handle multiple responsibilities efficiently."
+      }
     ]
   },
   "talk": {
@@ -59,5 +99,137 @@
     "default": "Fakhri Farajov Portfolio",
     "comeBack": "Come Back!",
     "welcomeBack": "Welcome Back!"
+  },
+  "dashboard": {
+    "main": {
+      "overview": "Overview",
+      "totalProjects": "Total Projects",
+      "projectsGrowth": "+12% from last month",
+      "clientReviews": "Client Reviews",
+      "reviewsBasedOn": "Based on 128 responses",
+      "newMessages": "New Messages",
+      "viewAllInquiries": "View all inquiries",
+      "recentActivityTitle": "Recent Project Activity",
+      "recentActivityDesc": "A detailed look at your latest portfolio additions.",
+      "projectTitle": "Project Title Alpha {number}",
+      "projectUpdated": "Updated 2 hours ago",
+      "projectStatus": "Live"
+    },
+    "sidebar": {
+      "admin": "Portfolio Admin",
+      "main": "Main",
+      "project_management": "Project Management",
+      "review_management": "Review Management",
+      "offers": "Offers"
+    },
+    "offers": {
+      "title": "Job Offers",
+      "incoming": "Incoming Opportunities",
+      "desc": "Direct inquiries from your 'Talk' form.",
+      "viewDetails": "View Details",
+      "delete": "Delete",
+      "deleteConfirmTitle": "Are you sure?",
+      "deleteConfirmDesc": "This action cannot be undone. Do you want to delete this offer?",
+      "cancel": "Cancel",
+      "confirmDelete": "Delete"
+    },
+    "projects": {
+      "add": "Add Project",
+      "title": "Projects",
+      "total": "Total projects",
+      "edit": "Edit",
+      "delete": "Delete",
+      "projectTitle": "Project #{number}",
+      "builtWith": "Built with",
+      "languages": "Languages",
+      "showing": "Showing",
+      "to": "to",
+      "of": "of",
+      "results": "results"
+    },
+    "reviews": {
+      "title": "Review Management",
+      "heading": "Client Reviews",
+      "desc": "Manage testimonials shown on your portfolio.",
+      "add": "Add Review",
+      "name": "Name Surname",
+      "roleCompany": "Role @ Company",
+      "description": "This is a sample description of the client's experience working with you..."
+    },
+    "modalProjects": {
+      "title": "Project Details",
+      "tabs": {
+        "az": "Azerbaijani",
+        "ru": "Russian",
+        "en": "English"
+      },
+      "fields": {
+        "title": "Project Title ({lang})",
+        "description": "Description ({lang})",
+        "role": "Role ({lang})",
+        "tools": "Tools & Technologies (English Only)",
+        "projectLink": "Project Link",
+        "github": "GitHub Repository",
+        "images": "Project Images"
+      },
+      "placeholders": {
+        "title": "Enter title...",
+        "description": "Describe the project...",
+        "role": "e.g. Lead Developer",
+        "tools": "Type tool and press Enter",
+        "projectLink": "https://...",
+        "github": "https://github.com/..."
+      },
+      "actions": {
+        "upload": "Upload",
+        "save": "Save Project"
+      }
+    },
+    "modalOffers": {
+      "status_new": "New",
+      "status_interview": "Interview",
+      "status_declined": "Declined",
+      "status_hired": "Hired",
+      "jobProposal": "Job Proposal",
+      "sentFrom": "Sent from {company} ({email})",
+      "clientMessage": "Client Message",
+      "preferredEngagement": "Preferred Engagement",
+      "receivedOn": "Received On",
+      "archive": "Archive",
+      "replyMail": "Reply by Mail",
+      "updateStatus": "Update Status"
+    },
+    "modalReviews": {
+      "editTitle": "Edit Review",
+      "addTitle": "Add New Review",
+      "fields": {
+        "profilePicture": "Profile Picture",
+        "name": "Name",
+        "surname": "Surname",
+        "email": "Email",
+        "role": "Role",
+        "company": "Company",
+        "description": "Review Description"
+      },
+      "placeholders": {
+        "name": "John",
+        "surname": "Doe",
+        "email": "john@example.com",
+        "role": "CEO / Manager",
+        "company": "Tech Solutions Inc.",
+        "description": "Write the testimonial here..."
+      },
+      "actions": {
+        "cancel": "Cancel",
+        "save": "Save Review",
+        "update": "Update Review"
+      }
+    },
+    "modalDelete": {
+      "title": "Delete Project",
+      "areYouSure": "Are you sure you want to delete this project?",
+      "cancel": "Cancel",
+      "confirmDelete": "Delete"
+    }
   }
 }
