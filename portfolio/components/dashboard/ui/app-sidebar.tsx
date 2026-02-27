@@ -43,8 +43,8 @@ const data = {
       icon: Star,
     },
     {
-      title: "Messages",
-      url: "/dashboard/messages",
+      title: "Offers",
+      url: "/dashboard/offers",
       icon: MessageSquare,
     },
   ],

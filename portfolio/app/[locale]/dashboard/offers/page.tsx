@@ -1,19 +1,47 @@
 "use client";
 
+import React, { useState } from "react";
 import { AppSidebar } from "@/components/dashboard/ui/app-sidebar";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { Mail, Briefcase, Clock, CheckCircle2, XCircle, MoreVertical } from "lucide-react";
+import { Briefcase, Clock, CheckCircle2, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { OfferDetailModal } from "@/components/dashboard/ui/modal-offers";
 
+// Sample data mirroring your "Talk" form fields
 const offers = [
-    { id: 1, name: "Elon Musk", company: "Tesla", type: "Full-time", status: "New", date: "2h ago" },
-    { id: 2, name: "Mark Zuck", company: "Meta", type: "Freelance", status: "Interviewing", date: "1d ago" },
-    { id: 3, name: "Sam Altman", company: "OpenAI", type: "Contract", status: "Accepted", date: "3d ago" },
+    { 
+        id: 1, 
+        name: "Elon Musk", 
+        email: "elon@tesla.com",
+        company: "Tesla", 
+        type: "Full-time", 
+        status: "new", 
+        date: "2h ago",
+        message: "We need a lead developer for our new Mars interface project. Your GSAP skills are exactly what we are looking for. Let's talk ASAP."
+    },
+    { 
+        id: 2, 
+        name: "Mark Zuck", 
+        email: "zuck@meta.com",
+        company: "Meta", 
+        type: "Freelance", 
+        status: "interview", 
+        date: "1d ago",
+        message: "Building the metaverse requires high-performance dashboards. Can you help us optimize our Turbopack implementation?"
+    }
 ];
 
 export default function OffersPage() {
+    const [selectedOffer, setSelectedOffer] = useState<any>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const handleViewDetails = (offer: any) => {
+        setSelectedOffer(offer);
+        setIsModalOpen(true);
+    };
+
     return (
         <SidebarProvider>
             <AppSidebar />
@@ -49,32 +77,39 @@ export default function OffersPage() {
                                 </div>
 
                                 <div className="mt-6 flex items-center gap-2">
-                                    <StatusIcon status={offer.status} />
-                                    <span className="text-xs font-medium">{offer.status}</span>
+                                    <StatusIndicator status={offer.status} />
+                                    <span className="text-xs font-medium capitalize">{offer.status}</span>
                                     <span className="ml-auto text-[10px] text-muted-foreground flex items-center gap-1">
                                         <Clock className="size-3" /> {offer.date}
                                     </span>
                                 </div>
 
-                                <div className="mt-4 grid grid-cols-2 gap-2">
-                                    <Button variant="secondary" size="sm" className="h-8 text-[11px] font-bold uppercase tracking-tight">
+                                <div className="mt-4">
+                                    <Button 
+                                        onClick={() => handleViewDetails(offer)}
+                                        className="w-full h-8 text-[11px] font-bold uppercase tracking-tight bg-primary text-primary-foreground hover:opacity-90"
+                                    >
                                         View Details
-                                    </Button>
-                                    <Button variant="outline" size="sm" className="h-8 text-[11px] font-bold uppercase tracking-tight">
-                                        Email
                                     </Button>
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
+
+                {/* The Modal */}
+                <OfferDetailModal 
+                    offer={selectedOffer} 
+                    isOpen={isModalOpen} 
+                    onOpenChange={setIsModalOpen} 
+                />
             </SidebarInset>
         </SidebarProvider>
     );
 }
 
-function StatusIcon({ status }: { status: string }) {
-    if (status === "Accepted") return <CheckCircle2 className="size-4 text-emerald-500" />;
-    if (status === "Rejected") return <XCircle className="size-4 text-destructive" />;
+function StatusIndicator({ status }: { status: string }) {
+    if (status === "hired") return <CheckCircle2 className="size-4 text-emerald-500" />;
+    if (status === "declined") return <XCircle className="size-4 text-destructive" />;
     return <div className="size-2 rounded-full bg-blue-500 animate-pulse" />;
 }
