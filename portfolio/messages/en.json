@@ -101,6 +101,7 @@
     "welcomeBack": "Welcome Back!"
   },
   "dashboard": {
+    "loading": "Loading...",
     "main": {
       "overview": "Overview",
       "totalProjects": "Total Projects",
@@ -154,7 +155,17 @@
       "add": "Add Review",
       "name": "Name Surname",
       "roleCompany": "Role @ Company",
-      "description": "This is a sample description of the client's experience working with you..."
+      "description": "This is a sample description of the client's experience working with you...",
+      "fields": {
+        "descriptionAz": "Review (AZ)",
+        "descriptionRu": "Review (RU)",
+        "descriptionEn": "Review (EN)"
+      },
+      "placeholders": {
+        "descriptionAz": "Review in Azerbaijani",
+        "descriptionRu": "Review in Russian",
+        "descriptionEn": "Review in English"
+      }
     },
     "modalProjects": {
       "title": "Project Details",
@@ -197,7 +208,9 @@
       "receivedOn": "Received On",
       "archive": "Archive",
       "replyMail": "Reply by Mail",
-      "updateStatus": "Update Status"
+      "updateStatus": "Update Status",
+      "jobType": "Job Type",
+      "updatedOn": "Updated On"
     },
     "modalReviews": {
       "editTitle": "Edit Review",
@@ -209,7 +222,10 @@
         "email": "Email",
         "role": "Role",
         "company": "Company",
-        "description": "Review Description"
+        "description": "Review Description",
+        "descriptionAz": "Review (AZ)",
+        "descriptionRu": "Review (RU)",
+        "descriptionEn": "Review (EN)"
       },
       "placeholders": {
         "name": "John",
@@ -217,7 +233,10 @@
         "email": "john@example.com",
         "role": "CEO / Manager",
         "company": "Tech Solutions Inc.",
-        "description": "Write the testimonial here..."
+        "description": "Write the testimonial here...",
+        "descriptionAz": "Review in Azerbaijani",
+        "descriptionRu": "Review in Russian",
+        "descriptionEn": "Review in English"
       },
       "actions": {
         "cancel": "Cancel",

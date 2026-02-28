@@ -61,6 +61,7 @@
     "welcomeBack": "С возвращением!"
   },
   "dashboard": {
+    "loading": "Загрузка...",
     "main": {
       "overview": "Обзор",
       "totalProjects": "Всего проектов",
@@ -126,7 +127,17 @@
       "add": "Добавить отзыв",
       "name": "Имя Фамилия",
       "roleCompany": "Должность @ Компания",
-      "description": "Это пример описания опыта клиента работы с вами..."
+      "description": "Это пример описания опыта клиента работы с вами...",
+      "fields": {
+        "descriptionAz": "Отзыв (AZ)",
+        "descriptionRu": "Отзыв (RU)",
+        "descriptionEn": "Отзыв (EN)"
+      },
+      "placeholders": {
+        "descriptionAz": "Отзыв на азербайджанском языке",
+        "descriptionRu": "Отзыв на русском языке",
+        "descriptionEn": "Отзыв на английском языке"
+      }
     },
     "modalProjects": {
       "title": "Детали проекта",
@@ -169,7 +180,9 @@
       "receivedOn": "Получено",
       "archive": "Архивировать",
       "replyMail": "Ответить по почте",
-      "updateStatus": "Обновить статус"
+      "updateStatus": "Обновить статус",
+      "jobType": "Тип работы",
+      "updatedOn": "Обновлено"
     },
     "modalReviews": {
       "editTitle": "Редактировать отзыв",
@@ -178,10 +191,13 @@
         "profilePicture": "Фото профиля",
         "name": "Имя",
         "surname": "Фамилия",
-        "email": "Email",
-        "role": "Роль",
+        "email": "Эл. почта",
+        "role": "Должность",
         "company": "Компания",
-        "description": "Описание отзыва"
+        "description": "Описание отзыва",
+        "descriptionAz": "Отзыв (AZ)",
+        "descriptionRu": "Отзыв (RU)",
+        "descriptionEn": "Отзыв (EN)"
       },
       "placeholders": {
         "name": "Иван",
@@ -189,7 +205,10 @@
         "email": "ivan@example.com",
         "role": "Генеральный директор / Менеджер",
         "company": "Tech Solutions Inc.",
-        "description": "Напишите отзыв здесь..."
+        "description": "Напишите отзыв здесь...",
+        "descriptionAz": "Отзыв на азербайджанском языке",
+        "descriptionRu": "Отзыв на русском языке",
+        "descriptionEn": "Отзыв на английском языке"
       },
       "actions": {
         "cancel": "Отмена",

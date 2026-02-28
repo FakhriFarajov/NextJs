@@ -61,6 +61,7 @@
     "welcomeBack": "Xoş gəldiniz!"
   },
   "dashboard": {
+    "loading": "Yüklənir...",
     "main": {
       "overview": "İcmal",
       "totalProjects": "Ümumi layihələr",
@@ -157,7 +158,9 @@
       "receivedOn": "Alınma tarixi",
       "archive": "Arxivləşdir",
       "replyMail": "Mail ilə cavab ver",
-      "updateStatus": "Statusu Yenilə"
+      "updateStatus": "Statusu Yenilə",
+      "jobType": "İş növü",
+      "updatedOn": "Yenilənmə tarixi"
     },
     "modalReviews": {
       "editTitle": "Rəyə düzəliş edin",
@@ -169,7 +172,10 @@
         "email": "Email",
         "role": "Rol",
         "company": "Şirkət",
-        "description": "Rəyin təsviri"
+        "description": "Rəyin təsviri",
+        "descriptionAz": "Rəy (AZ)",
+        "descriptionRu": "Отзыв (RU)",
+        "descriptionEn": "Review (EN)"
       },
       "placeholders": {
         "name": "Cavid",
@@ -177,7 +183,10 @@
         "email": "cavid@example.com",
         "role": "CEO / Menecer",
         "company": "Tech Solutions Inc.",
-        "description": "Rəyi burada yazın..."
+        "description": "Rəyi burada yazın...",
+        "descriptionAz": "Rəy Azərbaycan dilində",
+        "descriptionRu": "Отзыв на русском языке",
+        "descriptionEn": "Review in English"
       },
       "actions": {
         "cancel": "Ləğv et",

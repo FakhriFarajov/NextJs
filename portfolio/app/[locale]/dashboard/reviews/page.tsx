@@ -62,7 +62,7 @@ export default function ReviewsManagement() {
 
                     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                         {loading ? (
-                            <div className="col-span-full text-center py-10 text-muted-foreground">{t("dashboard.reviews.loading")}</div>
+                            <div className="col-span-full text-center py-10 text-muted-foreground">{t("dashboard.loading")}</div>
                         ) : (
                             reviews.map((review) => (
                                 <div key={review._id} className="group relative rounded-xl border bg-card p-5 shadow-sm hover:border-primary/50 transition-all">
@@ -87,11 +87,6 @@ export default function ReviewsManagement() {
                                             <Building2 className="size-3" /> {review.role} / {review.company}
                                         </p>
                                     </div>
-
-                                    <p className="mt-4 text-xs italic text-muted-foreground line-clamp-3 leading-relaxed">
-                                        {/* Show review text in one language, e.g. en */}
-                                        {review.review?.en}
-                                    </p>
                                 </div>
                             ))
                         )}
@@ -113,7 +108,13 @@ export default function ReviewsManagement() {
                             <p>{tDelete("areYouSure")}</p>
                             <DialogFooter>
                                 <Button variant="outline" onClick={closeDeleteModal}>{tDelete("cancel")}</Button>
-                                <Button variant="destructive" onClick={closeDeleteModal}>{tDelete("confirmDelete")}</Button>
+                                <Button variant="destructive" onClick={async () => {
+                                    if (deletingReview && deletingReview._id) {
+                                        await useReviewsStore.getState().deleteReview(deletingReview._id);
+                                        await getReviews();
+                                    }
+                                    closeDeleteModal();
+                                }}>{tDelete("confirmDelete")}</Button>
                             </DialogFooter>
                         </DialogContent>
                     </Dialog>

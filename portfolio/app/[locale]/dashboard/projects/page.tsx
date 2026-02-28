@@ -13,12 +13,13 @@ import { useProjectsStore } from "./store/use-projects";
 
 export default function Projects() {
     const t = useTranslations("dashboard.projects");
+    const translationLoading = useTranslations();
     const tDelete = useTranslations("dashboard.modalDelete");
     const [editModalOpen, setEditModalOpen] = useState(false);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [selectedProject, setSelectedProject] = useState<any>(null);
 
-    const { projects, getProjects, loading } = useProjectsStore();
+    const { projects, getProjects, deleteProject, loading } = useProjectsStore();
 
     useEffect(() => {
         getProjects();
@@ -66,7 +67,7 @@ export default function Projects() {
                     {/* Compact Grid */}
                     <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                         {loading ? (
-                            <div className="col-span-full text-center py-10 text-muted-foreground">{t("loading")}</div>
+                            <div className="col-span-full text-center py-10 text-muted-foreground">{translationLoading("dashboard.loading")}</div>
                         ) : (
                             projects.map((project) => (
                                 <div key={project._id} className="group flex flex-col rounded-lg border bg-card shadow-sm transition-hover hover:border-primary/50">
@@ -148,7 +149,14 @@ export default function Projects() {
                             <p>{tDelete("areYouSure")}</p>
                             <DialogFooter>
                                 <Button variant="outline" onClick={closeDeleteModal}>{tDelete("cancel")}</Button>
-                                <Button variant="destructive" onClick={closeDeleteModal}>{tDelete("confirmDelete")}</Button>
+                                <Button variant="destructive" onClick={async () => {
+                                    // eslint-disable-next-line no-console
+                                    if (selectedProject) {
+                                        await deleteProject(selectedProject);
+                                        await getProjects();
+                                    }
+                                    closeDeleteModal();
+                                }}>{tDelete("confirmDelete")}</Button>
                             </DialogFooter>
                         </DialogContent>
                     </Dialog>

@@ -12,7 +12,8 @@ const api = axios.create({
 
 const projectsAPI = {
     getAllProjects: async () => {
-        const response = await api.get("/");
+        const response = await api.get("");
+        console.log("API response for getAllProjects:", response);
         return response.data;
     },
     getProjectById: async (id: string) => {
@@ -24,7 +25,7 @@ const projectsAPI = {
         return response.data;
     },
     updateProject: async (id: string, project: Project) => {
-        const response = await api.put(`/${id}`, project);
+        const response = await api.patch(`/${id}`, project);
         return response.data;
     },
     deleteProject: async (id: string) => {

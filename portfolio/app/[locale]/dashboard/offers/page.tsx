@@ -1,5 +1,4 @@
 "use client";
-
 import  { useState, useEffect } from "react";
 import { AppSidebar } from "../ui/app-sidebar";
 import { Separator } from "@/components/ui/separator";
@@ -55,7 +54,7 @@ export default function OffersPage() {
                     </div>
 
                     {loading ? (
-                        <div className="text-center py-10 text-muted-foreground">{t("dashboard.offers.loading")}</div>
+                            <div className="col-span-full text-center py-10 text-muted-foreground">{t("dashboard.loading")}</div>
                     ) : (
                         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                             {offers.map((offer) => (

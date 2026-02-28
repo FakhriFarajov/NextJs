@@ -24,7 +24,7 @@ const reviewsAPI = {
         return response.data;
     },
     updateReview: async (id: string, review: Review) => {
-        const response = await api.put(`/${id}`, review);
+        const response = await api.patch(`/${id}`, review);
         return response.data;
     },
     deleteReview: async (id: string) => {

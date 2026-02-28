@@ -15,10 +15,11 @@ export function ReviewCrudModal({ isOpen, onOpenChange, initialData }: any) {
     const { createReview, updateReview, getReviews } = useReviewsStore();
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
-    const [email, setEmail] = useState("");
     const [role, setRole] = useState("");
     const [company, setCompany] = useState("");
-    const [description, setDescription] = useState("");
+    const [descriptionAz, setDescriptionAz] = useState("");
+    const [descriptionRu, setDescriptionRu] = useState("");
+    const [descriptionEn, setDescriptionEn] = useState("");
     const [profileImage, setProfileImage] = useState<string>("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -27,18 +28,20 @@ export function ReviewCrudModal({ isOpen, onOpenChange, initialData }: any) {
         if (initialData) {
             setName(initialData.name || "");
             setSurname(initialData.surname || "");
-            setEmail(initialData.email || "");
             setRole(initialData.role || "");
             setCompany(initialData.company || "");
-            setDescription(initialData.description || "");
-            setProfileImage(initialData.profileImage || "");
+            setDescriptionAz(initialData.review?.az || "");
+            setDescriptionRu(initialData.review?.ru || "");
+            setDescriptionEn(initialData.review?.en || "");
+            setProfileImage(initialData.imageObjectName || "");
         } else {
             setName("");
             setSurname("");
-            setEmail("");
             setRole("");
             setCompany("");
-            setDescription("");
+            setDescriptionAz("");
+            setDescriptionRu("");
+            setDescriptionEn("");
             setProfileImage("");
         }
     }, [initialData]);
@@ -61,11 +64,10 @@ export function ReviewCrudModal({ isOpen, onOpenChange, initialData }: any) {
         const reviewData = {
             name,
             surname,
-            email,
             role,
             company,
             imageObjectName: profileImage,
-            review: { en: description, ru: description, az: description }, // You may want to localize this
+            review: { az: descriptionAz, ru: descriptionRu, en: descriptionEn },
             createdAt: initialData?.createdAt || new Date().toISOString(),
             updatedAt: new Date().toISOString(),
             _id: initialData?._id || null
@@ -136,15 +138,8 @@ export function ReviewCrudModal({ isOpen, onOpenChange, initialData }: any) {
                         </div>
                     </div>
 
-                    {/* Email & Role */}
+                    {/* Role & Company */}
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="space-y-2">
-                            <Label htmlFor="email">{t("fields.email")}</Label>
-                            <Input id="email" type="email" placeholder={t("placeholders.email")}
-                                value={email}
-                                onChange={e => setEmail(e.target.value)}
-                                className="bg-muted/30" />
-                        </div>
                         <div className="space-y-2">
                             <Label htmlFor="role">{t("fields.role")}</Label>
                             <Input id="role" placeholder={t("placeholders.role")}
@@ -163,15 +158,31 @@ export function ReviewCrudModal({ isOpen, onOpenChange, initialData }: any) {
                             className="bg-muted/30" />
                     </div>
 
-                    {/* Description */}
+                    {/* Description (Multi-language) */}
                     <div className="space-y-2">
-                        <Label htmlFor="desc">{t("fields.description")}</Label>
+                        <Label htmlFor="desc-az">{t("fields.descriptionAz") || "Review (AZ)"}</Label>
                         <Textarea 
-                            id="desc" 
-                            placeholder={t("placeholders.description")}
-                            value={description}
-                            onChange={e => setDescription(e.target.value)}
-                            className="min-h-[120px] bg-muted/30 resize-none" 
+                            id="desc-az" 
+                            placeholder={t("placeholders.descriptionAz") || "Review in Azerbaijani"}
+                            value={descriptionAz}
+                            onChange={e => setDescriptionAz(e.target.value)}
+                            className="min-h-[80px] bg-muted/30 resize-none" 
+                        />
+                        <Label htmlFor="desc-ru">{t("fields.descriptionRu") || "Review (RU)"}</Label>
+                        <Textarea 
+                            id="desc-ru" 
+                            placeholder={t("placeholders.descriptionRu") || "Review in Russian"}
+                            value={descriptionRu}
+                            onChange={e => setDescriptionRu(e.target.value)}
+                            className="min-h-[80px] bg-muted/30 resize-none" 
+                        />
+                        <Label htmlFor="desc-en">{t("fields.descriptionEn") || "Review (EN)"}</Label>
+                        <Textarea 
+                            id="desc-en" 
+                            placeholder={t("placeholders.descriptionEn") || "Review in English"}
+                            value={descriptionEn}
+                            onChange={e => setDescriptionEn(e.target.value)}
+                            className="min-h-[80px] bg-muted/30 resize-none" 
                         />
                     </div>
                 </div>

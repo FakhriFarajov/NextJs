@@ -40,28 +40,28 @@ export function ProjectModal({ trigger, open, onOpenChange, initialData }: Proje
   useEffect(() => {
     if (initialData) {
       setTitles({
-        en: initialData.title?.en || "",
-        az: initialData.title?.az || "",
-        ru: initialData.title?.ru || ""
-      })
+        en: initialData.titles?.[0]?.en || "",
+        az: initialData.titles?.[0]?.az || "",
+        ru: initialData.titles?.[0]?.ru || ""
+      });
       setDescriptions({
-        en: initialData.description?.en || "",
-        az: initialData.description?.az || "",
-        ru: initialData.description?.ru || ""
-      })
+        en: initialData.description?.[0]?.en || "",
+        az: initialData.description?.[0]?.az || "",
+        ru: initialData.description?.[0]?.ru || ""
+      });
       setRoles({
-        en: initialData.role?.en || "",
-        az: initialData.role?.az || "",
-        ru: initialData.role?.ru || ""
-      })
-      setTools(initialData.tools || [])
-      setImages(initialData.images || [])
+        en: initialData.role?.[0]?.en || "",
+        az: initialData.role?.[0]?.az || "",
+        ru: initialData.role?.[0]?.ru || ""
+      });
+      setTools(initialData.techStack || []);
+      setImages((initialData.images || []).map((img: any) => img.src));
     } else {
-      setTitles({ en: "", az: "", ru: "" })
-      setDescriptions({ en: "", az: "", ru: "" })
-      setRoles({ en: "", az: "", ru: "" })
-      setTools([])
-      setImages([])
+      setTitles({ en: "", az: "", ru: "" });
+      setDescriptions({ en: "", az: "", ru: "" });
+      setRoles({ en: "", az: "", ru: "" });
+      setTools([]);
+      setImages([]);
     }
   }, [initialData])
 
@@ -96,16 +96,13 @@ export function ProjectModal({ trigger, open, onOpenChange, initialData }: Proje
       description: [{ en: descriptions.en, ru: descriptions.ru, az: descriptions.az }],
       role: [{ en: roles.en, ru: roles.ru, az: roles.az }],
       techStack: tools,
-      images: images.map(src => ({ src, alt: titles.en || "Project image" })),
-      createdAt: initialData?.createdAt || new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      _id: initialData?._id || null
+      images: images.map(src => ({ src, alt: titles.en || "Project image" }))
     };
     try {
       if (initialData && initialData._id) {
-        await updateProject(initialData._id, projectData);
+        await updateProject(initialData._id, projectData as any);
       } else {
-        await createProject(projectData);
+        await createProject(projectData as any);
       }
       await getProjects();
       onOpenChange && onOpenChange(false);

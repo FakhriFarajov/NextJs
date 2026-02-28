@@ -84,19 +84,6 @@ export function OfferDetailModal({ offer, isOpen, onOpenChange, jobTypes }: any)
 
                 <Separator />
 
-                <DialogFooter className="flex gap-2 sm:justify-between pt-2">
-                    <Button variant="ghost" className="text-destructive hover:bg-destructive/10 text-xs font-bold uppercase" onClick={handleDelete} disabled={loading}>
-                        {t("dashboard.modalOffers.archive")}
-                    </Button>
-                    <div className="flex gap-2">
-                        <Button variant="outline" className="text-xs font-bold uppercase" onClick={() => window.location.href = `mailto:${offer.email}`}> 
-                            {t("dashboard.modalOffers.replyMail")}
-                        </Button>
-                        <Button className="text-xs font-bold uppercase px-8" onClick={handleUpdate} disabled={loading}>
-                            {t("dashboard.modalOffers.updateStatus")}
-                        </Button>
-                    </div>
-                </DialogFooter>
             </DialogContent>
         </Dialog>
     );
