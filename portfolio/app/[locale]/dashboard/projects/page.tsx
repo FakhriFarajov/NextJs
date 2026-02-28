@@ -7,8 +7,9 @@ import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, MoreHorizontal, Pencil, Trash2 } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { useTranslations } from "next-intl"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { useProjectsStore } from "./store/use-projects";
 
 export default function Projects() {
     const t = useTranslations("dashboard.projects");
@@ -17,22 +18,21 @@ export default function Projects() {
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [selectedProject, setSelectedProject] = useState<any>(null);
 
-    // Sample project data
-    const projects = [1, 2, 3, 4, 5].map((i) => ({
-        id: i,
-        title: t("projectTitle", { number: i }),
-        // Add more fields as needed
-    }));
+    const { projects, getProjects, loading } = useProjectsStore();
+
+    useEffect(() => {
+        getProjects();
+    }, [getProjects]);
 
     // Handler for edit
-    const handleEdit = (projectId: number) => {
-        const project = projects.find(p => p.id === projectId);
+    const handleEdit = (projectId: string) => {
+        const project = projects.find(p => p._id === projectId);
         setSelectedProject(project);
         setEditModalOpen(true);
     };
 
     // Handler for delete
-    const handleDelete = (projectId: number) => {
+    const handleDelete = (projectId: string) => {
         setSelectedProject(projectId);
         setDeleteModalOpen(true);
     };
@@ -65,49 +65,56 @@ export default function Projects() {
 
                     {/* Compact Grid */}
                     <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-                        {projects.map((project) => (
-                            <div key={project.id} className="group flex flex-col rounded-lg border bg-card shadow-sm transition-hover hover:border-primary/50">
-                                {/* Compact Image Wrapper */}
-                                <div className="relative aspect-[4/3] w-full overflow-hidden rounded-t-lg bg-muted">
-                                    <div className="absolute right-2 top-2 z-10">
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button variant="secondary" size="icon" className="size-7 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
-                                                    <MoreHorizontal className="size-4" />
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end">
-                                                <DropdownMenuItem className="gap-2" onClick={() => handleEdit(project.id)}>
-                                                    <Pencil className="size-3.5" /> {t("edit")}
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem className="gap-2 text-destructive focus:text-destructive" onClick={() => handleDelete(project.id)}>
-                                                    <Trash2 className="size-3.5" /> {t("delete")}
-                                                </DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
+                        {loading ? (
+                            <div className="col-span-full text-center py-10 text-muted-foreground">{t("loading")}</div>
+                        ) : (
+                            projects.map((project) => (
+                                <div key={project._id} className="group flex flex-col rounded-lg border bg-card shadow-sm transition-hover hover:border-primary/50">
+                                    {/* Compact Image Wrapper */}
+                                    <div className="relative aspect-[4/3] w-full overflow-hidden rounded-t-lg bg-muted">
+                                        <div className="absolute right-2 top-2 z-10">
+                                            <DropdownMenu>
+                                                <DropdownMenuTrigger asChild>
+                                                    <Button variant="secondary" size="icon" className="size-7 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                                                        <MoreHorizontal className="size-4" />
+                                                    </Button>
+                                                </DropdownMenuTrigger>
+                                                <DropdownMenuContent align="end">
+                                                    {typeof project._id === 'string' && project._id && (
+                                                        <DropdownMenuItem className="gap-2" onClick={() => handleEdit(project._id as string)}>
+                                                            <Pencil className="size-3.5" /> {t("edit")}
+                                                        </DropdownMenuItem>
+                                                    )}
+                                                    {typeof project._id === 'string' && project._id && (
+                                                        <DropdownMenuItem className="gap-2 text-destructive focus:text-destructive" onClick={() => handleDelete(project._id as string)}>
+                                                            <Trash2 className="size-3.5" /> {t("delete")}
+                                                        </DropdownMenuItem>
+                                                    )}
+                                                </DropdownMenuContent>
+                                            </DropdownMenu>
+                                        </div>
+                                        {/* Placeholder for real image */}
+                                        <div className="h-full w-full bg-gradient-to-br from-muted to-muted/20 flex items-center justify-center">
+                                             <span className="text-[10px] text-muted-foreground font-mono">IMG_{project._id}.PNG</span>
+                                        </div>
                                     </div>
-                                    {/* Placeholder for real image */}
-                                    <div className="h-full w-full bg-gradient-to-br from-muted to-muted/20 flex items-center justify-center">
-                                         <span className="text-[10px] text-muted-foreground font-mono">IMG_0{project.id}.PNG</span>
-                                    </div>
-                                </div>
 
-                                {/* Content Section */}
-                                <div className="p-3">
-                                    <h3 className="truncate text-sm font-semibold leading-none">{project.title}</h3>
-                                    <p className="mt-1.5 line-clamp-1 text-[11px] text-muted-foreground">
-                                        {t("builtWith")}
-                                    </p>
-                                    <div className="mt-3 flex items-center justify-between">
-                                        <span className="rounded-md bg-secondary px-1.5 py-0.5 text-[10px] font-medium">{t("languages")}</span>
-                                        <div className="flex gap-1">
-                                            <div className="size-1.5 rounded-full bg-emerald-500" />
+                                    {/* Content Section */}
+                                    <div className="p-3">
+                                        <h3 className="truncate text-sm font-semibold leading-none">{project.titles?.[0]?.en || "Untitled"}</h3>
+                                        <p className="mt-1.5 line-clamp-1 text-[11px] text-muted-foreground">
+                                            {t("builtWith")}
+                                        </p>
+                                        <div className="mt-3 flex items-center justify-between">
+                                            <span className="rounded-md bg-secondary px-1.5 py-0.5 text-[10px] font-medium">{t("languages")}</span>
+                                            <div className="flex gap-1">
+                                                <div className="size-1.5 rounded-full bg-emerald-500" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
-
+                            ))
+                        )}
                     </div>
 
                     {/* Simple Pagination Footer */}

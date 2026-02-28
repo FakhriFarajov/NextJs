@@ -16,6 +16,7 @@ import { ImagePlus, X, Link as LinkIcon } from "lucide-react"
 import { useEffect, useState } from "react"
 import { Separator } from "@/components/ui/separator"
 import { useTranslations } from "next-intl"
+import { useProjectsStore } from "../projects/store/use-projects"
 
 interface ProjectModalProps {
   trigger?: React.ReactNode;
@@ -26,12 +27,15 @@ interface ProjectModalProps {
 
 export function ProjectModal({ trigger, open, onOpenChange, initialData }: ProjectModalProps) {
   const t = useTranslations("dashboard.modalProjects")
+  const { createProject, updateProject, getProjects } = useProjectsStore();
   const [tools, setTools] = useState<string[]>([])
   const [currentTool, setCurrentTool] = useState("")
   const [titles, setTitles] = useState<{ [key: string]: string }>({ en: "", az: "", ru: "" })
   const [descriptions, setDescriptions] = useState<{ [key: string]: string }>({ en: "", az: "", ru: "" })
   const [roles, setRoles] = useState<{ [key: string]: string }>({ en: "", az: "", ru: "" })
   const [images, setImages] = useState<string[]>([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     if (initialData) {
@@ -83,6 +87,35 @@ export function ProjectModal({ trigger, open, onOpenChange, initialData }: Proje
     setImages(images.filter((_, i) => i !== index))
   }
 
+  const handleSave = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    setError(null);
+    const projectData = {
+      titles: [{ en: titles.en, ru: titles.ru, az: titles.az }],
+      description: [{ en: descriptions.en, ru: descriptions.ru, az: descriptions.az }],
+      role: [{ en: roles.en, ru: roles.ru, az: roles.az }],
+      techStack: tools,
+      images: images.map(src => ({ src, alt: titles.en || "Project image" })),
+      createdAt: initialData?.createdAt || new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+      _id: initialData?._id || null
+    };
+    try {
+      if (initialData && initialData._id) {
+        await updateProject(initialData._id, projectData);
+      } else {
+        await createProject(projectData);
+      }
+      await getProjects();
+      onOpenChange && onOpenChange(false);
+    } catch (e: any) {
+      setError(e?.message || "Save failed");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
@@ -90,6 +123,7 @@ export function ProjectModal({ trigger, open, onOpenChange, initialData }: Proje
         <DialogHeader>
           <DialogTitle>{t("title")}</DialogTitle>
         </DialogHeader>
+        <form onSubmit={handleSave}>
         <Tabs defaultValue="en" className="w-full">
           <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="az">{t("tabs.az")}</TabsTrigger>
@@ -179,9 +213,13 @@ export function ProjectModal({ trigger, open, onOpenChange, initialData }: Proje
             </div>
           </div>
         </div>
+        {error && <div className="text-destructive text-xs font-bold px-2">{error}</div>}
         <DialogFooter className="mt-6">
-          <Button type="submit" className="w-full md:w-auto">{t("actions.save")}</Button>
+          <Button type="submit" className="w-full md:w-auto" disabled={loading}>
+            {t("actions.save")}
+          </Button>
         </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   )

@@ -8,9 +8,11 @@ import { ImagePlus } from "lucide-react";
 import { Plus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { useReviewsStore } from "../reviews/store/use-reviews";
 
 export function ReviewCrudModal({ isOpen, onOpenChange, initialData }: any) {
     const t = useTranslations("dashboard.modalReviews");
+    const { createReview, updateReview, getReviews } = useReviewsStore();
     const [name, setName] = useState("");
     const [surname, setSurname] = useState("");
     const [email, setEmail] = useState("");
@@ -18,6 +20,8 @@ export function ReviewCrudModal({ isOpen, onOpenChange, initialData }: any) {
     const [company, setCompany] = useState("");
     const [description, setDescription] = useState("");
     const [profileImage, setProfileImage] = useState<string>("");
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         if (initialData) {
@@ -50,6 +54,37 @@ export function ReviewCrudModal({ isOpen, onOpenChange, initialData }: any) {
         setProfileImage("");
     };
 
+    const handleSave = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError(null);
+        const reviewData = {
+            name,
+            surname,
+            email,
+            role,
+            company,
+            imageObjectName: profileImage,
+            review: { en: description, ru: description, az: description }, // You may want to localize this
+            createdAt: initialData?.createdAt || new Date().toISOString(),
+            updatedAt: new Date().toISOString(),
+            _id: initialData?._id || null
+        };
+        try {
+            if (initialData && initialData._id) {
+                await updateReview(initialData._id, reviewData);
+            } else {
+                await createReview(reviewData);
+            }
+            await getReviews();
+            onOpenChange(false);
+        } catch (e: any) {
+            setError(e?.message || "Save failed");
+        } finally {
+            setLoading(false);
+        }
+    };
+
     return (
         <Dialog open={isOpen} onOpenChange={onOpenChange}>
             <DialogContent className="max-w-xl sm:rounded-2xl">
@@ -57,6 +92,7 @@ export function ReviewCrudModal({ isOpen, onOpenChange, initialData }: any) {
                     <DialogTitle>{initialData ? t("editTitle") : t("addTitle")}</DialogTitle>
                 </DialogHeader>
 
+                <form onSubmit={handleSave}>
                 <div className="grid gap-6 py-4">
                     {/* Profile Picture Upload */}
                     <div className="flex flex-col items-center gap-4">
@@ -139,13 +175,14 @@ export function ReviewCrudModal({ isOpen, onOpenChange, initialData }: any) {
                         />
                     </div>
                 </div>
-
+                {error && <div className="text-destructive text-xs font-bold px-2">{error}</div>}
                 <DialogFooter>
                     <Button variant="outline" onClick={() => onOpenChange(false)}>{t("actions.cancel")}</Button>
-                    <Button className="px-8 font-bold uppercase tracking-tight text-xs">
+                    <Button className="px-8 font-bold uppercase tracking-tight text-xs" type="submit" disabled={loading}>
                         {initialData ? t("actions.update") : t("actions.save")}
                     </Button>
                 </DialogFooter>
+                </form>
             </DialogContent>
         </Dialog>
     );

@@ -1,38 +1,18 @@
 "use client";
 
-import React, { useState } from "react";
+import  { useState, useEffect } from "react";
 import { AppSidebar } from "../ui/app-sidebar";
 import { Separator } from "@/components/ui/separator";
 import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { Briefcase, Clock, CheckCircle2, XCircle } from "lucide-react";
+import { Briefcase, CheckCircle2, XCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { OfferDetailModal } from "../ui/modal-offers";
 import { useTranslations } from "next-intl";
+import { useOffersStore } from "./store/use-offers";
 
-// Sample data mirroring your "Talk" form fields
-const offers = [
-    { 
-        id: 1, 
-        name: "Elon Musk", 
-        email: "elon@tesla.com",
-        company: "Tesla", 
-        type: "Full-time", 
-        status: "new", 
-        date: "2h ago",
-        message: "We need a lead developer for our new Mars interface project. Your GSAP skills are exactly what we are looking for. Let's talk ASAP."
-    },
-    { 
-        id: 2, 
-        name: "Mark Zuck", 
-        email: "zuck@meta.com",
-        company: "Meta", 
-        type: "Freelance", 
-        status: "interview", 
-        date: "1d ago",
-        message: "Building the metaverse requires high-performance dashboards. Can you help us optimize our Turbopack implementation?"
-    }
-];
+// Job types for the offers
+const offerJobTypes = ["full-time", "part-time", "freelance", "contract", "internships"];
 
 export default function OffersPage() {
     const t = useTranslations();
@@ -40,6 +20,13 @@ export default function OffersPage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [deleteOffer, setDeleteOffer] = useState<any>(null);
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+    const { offers, getOffers, loading } = useOffersStore();
+
+    // Fetch offers when the component mounts
+    useEffect(() => {
+        getOffers();
+    }, [getOffers]);
 
     const handleViewDetails = (offer: any) => {
         setSelectedOffer(offer);
@@ -67,43 +54,43 @@ export default function OffersPage() {
                         <p className="text-muted-foreground text-xs">{t("dashboard.offers.desc")}</p>
                     </div>
 
-                    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                        {offers.map((offer) => (
-                            <div key={offer.id} className="group relative flex flex-col rounded-xl border bg-card p-5 shadow-sm transition-all hover:shadow-md">
-                                <div className="flex items-start justify-between">
-                                    <div className="flex items-center gap-3">
-                                        <div className="flex size-10 items-center justify-center rounded-full bg-primary/5 text-primary">
-                                            <Briefcase className="size-5" />
+                    {loading ? (
+                        <div className="text-center py-10 text-muted-foreground">{t("dashboard.offers.loading")}</div>
+                    ) : (
+                        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                            {offers.map((offer) => (
+                                <div key={offer._id} className="group relative flex flex-col rounded-xl border bg-card p-5 shadow-sm transition-all hover:shadow-md">
+                                    <div className="flex items-start justify-between">
+                                        <div className="flex items-center gap-3">
+                                            <div className="flex size-10 items-center justify-center rounded-full bg-primary/5 text-primary">
+                                                <Briefcase className="size-5" />
+                                            </div>
+                                            <div>
+                                                <h3 className="text-sm font-bold">{offer.name}</h3>
+                                                <p className="text-[11px] text-muted-foreground">{offer.email}</p>
+                                            </div>
                                         </div>
-                                        <div>
-                                            <h3 className="text-sm font-bold">{offer.name}</h3>
-                                            <p className="text-[11px] text-muted-foreground">{offer.company}</p>
-                                        </div>
+                                        <Badge variant="outline" className="text-[10px] font-bold uppercase tracking-tighter">
+                                            {offer.jobType}
+                                        </Badge>
                                     </div>
-                                    <Badge variant="outline" className="text-[10px] font-bold uppercase tracking-tighter">
-                                        {offer.type}
-                                    </Badge>
-                                </div>
 
-                                <div className="mt-6 flex items-center gap-2">
-                                    <StatusIndicator status={offer.status} />
-                                    <span className="text-xs font-medium capitalize">{offer.status}</span>
-                                    <span className="ml-auto text-[10px] text-muted-foreground flex items-center gap-1">
-                                        <Clock className="size-3" /> {offer.date}
-                                    </span>
-                                </div>
+                                    <div className="mt-6 text-xs text-muted-foreground">
+                                        <span>{offer.createdAt ? new Date(offer.createdAt).toLocaleString() : ""}</span>
+                                    </div>
 
-                                <div className="mt-4 flex gap-2">
-                                    <Button 
-                                        onClick={() => handleViewDetails(offer)}
-                                        className="w-full h-8 text-[11px] font-bold uppercase tracking-tight bg-primary text-primary-foreground hover:opacity-90"
-                                    >
-                                        {t("dashboard.offers.viewDetails")}
-                                    </Button>
+                                    <div className="mt-4 flex gap-2">
+                                        <Button 
+                                            onClick={() => handleViewDetails(offer)}
+                                            className="w-full h-8 text-[11px] font-bold uppercase tracking-tight bg-primary text-primary-foreground hover:opacity-90"
+                                        >
+                                            {t("dashboard.offers.viewDetails")}
+                                        </Button>
+                                    </div>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
+                            ))}
+                        </div>
+                    )}
                 </div>
 
                 {/* The Modal */}
@@ -111,6 +98,7 @@ export default function OffersPage() {
                     offer={selectedOffer} 
                     isOpen={isModalOpen} 
                     onOpenChange={setIsModalOpen} 
+                    jobTypes={offerJobTypes}
                 />
                 {/* Delete Confirmation Modal */}
                 {isDeleteModalOpen && (
