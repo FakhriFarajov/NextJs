@@ -1,3 +1,4 @@
+"use client";
 import { AppSidebar } from "../ui/app-sidebar"
 import { Separator } from "@/components/ui/separator"
 import {
@@ -13,9 +14,22 @@ import {
     ArrowUpRight 
 } from "lucide-react"
 import { useTranslations } from "next-intl"
+import { useEffect } from "react";
+import { useStatsStore } from "./store/use-stats";
+import { useProjectsStore } from "../projects/store/use-projects";
+import { redirect } from "next/navigation";
 
 export default function Main() {
     const t = useTranslations();
+    const { stats, loading: statsLoading, getStats } = useStatsStore();
+    const { projects, loading: projectsLoading, getProjects } = useProjectsStore();
+
+    useEffect(() => {
+        console.log("Fetching dashboard stats and projects...");
+        getStats();
+        getProjects();
+    }, [getStats, getProjects]);
+
     return (
         <SidebarProvider>
             <AppSidebar />
@@ -35,7 +49,7 @@ export default function Main() {
                             <div className="flex items-center justify-between">
                                 <div className="space-y-1">
                                     <p className="text-sm font-medium text-muted-foreground">{t("dashboard.main.totalProjects")}</p>
-                                    <p className="text-2xl font-bold">24</p>
+                                    <p className="text-2xl font-bold">{statsLoading ? "..." : stats?.projectsCount ?? 0}</p>
                                 </div>
                                 <div className="rounded-full bg-blue-500/10 p-2 text-blue-500">
                                     <Briefcase className="size-5" />
@@ -52,7 +66,7 @@ export default function Main() {
                             <div className="flex items-center justify-between">
                                 <div className="space-y-1">
                                     <p className="text-sm font-medium text-muted-foreground">{t("dashboard.main.clientReviews")}</p>
-                                    <p className="text-2xl font-bold">4.9</p>
+                                    <p className="text-2xl font-bold">{statsLoading ? "..." : stats?.reviewsCount ?? 0}</p>
                                 </div>
                                 <div className="rounded-full bg-amber-500/10 p-2 text-amber-500">
                                     <Star className="size-5" />
@@ -68,14 +82,14 @@ export default function Main() {
                             <div className="flex items-center justify-between">
                                 <div className="space-y-1">
                                     <p className="text-sm font-medium text-muted-foreground">{t("dashboard.main.newMessages")}</p>
-                                    <p className="text-2xl font-bold">12</p>
+                                    <p className="text-2xl font-bold">{statsLoading ? "..." : stats?.offersCount ?? 0}</p>
                                 </div>
                                 <div className="rounded-full bg-purple-500/10 p-2 text-purple-500">
                                     <MessageSquare className="size-5" />
                                 </div>
                             </div>
                             <div className="mt-4 flex items-center text-xs text-purple-500 underline cursor-pointer">
-                                <span>{t("dashboard.main.viewAllInquiries")}</span>
+                                <span onClick={() => {redirect("/dashboard/offers")}}>{t("dashboard.main.viewAllInquiries")}</span>
                                 <ArrowUpRight className="ml-1 size-3" />
                             </div>
                         </div>
@@ -88,22 +102,26 @@ export default function Main() {
                             <p className="text-sm text-muted-foreground">{t("dashboard.main.recentActivityDesc")}</p>
                         </div>
                         <div className="p-6">
-                           {/* Placeholder for a Table or List */}
+                           {/* Table/List of Projects */}
                            <div className="flex flex-col gap-4">
-                               {[1, 2, 3].map((i) => (
-                                   <div key={i} className="flex items-center justify-between rounded-lg border p-4 transition-colors hover:bg-muted/50">
-                                       <div className="flex items-center gap-4">
-                                           <div className="h-10 w-10 rounded bg-muted animate-pulse" />
-                                           <div>
-                                               <p className="font-medium text-sm">{t("dashboard.main.projectTitle", { number: i })}</p>
-                                               <p className="text-xs text-muted-foreground">{t("dashboard.main.projectUpdated")}</p>
+                               {projectsLoading ? (
+                                   <div className="text-center text-muted-foreground">Loading projects...</div>
+                               ) : (
+                                   projects.map((project) => (
+                                       <div key={project._id} className="flex items-center justify-between rounded-lg border p-4 transition-colors hover:bg-muted/50">
+                                           <div className="flex items-center gap-4">
+                                               <div className="h-10 w-10 rounded bg-muted animate-pulse" />
+                                               <div>
+                                                   <p className="font-medium text-sm">{project.titles?.[0]?.en || "Untitled"}</p>
+                                                   <p className="text-xs text-muted-foreground">{project.updatedAt ? new Date(project.updatedAt).toLocaleString() : ""}</p>
+                                               </div>
+                                           </div>
+                                           <div className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold">
+                                               {t("dashboard.main.projectStatus")}
                                            </div>
                                        </div>
-                                       <div className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold">
-                                           {t("dashboard.main.projectStatus")}
-                                       </div>
-                                   </div>
-                               ))}
+                                   ))
+                               )}
                            </div>
                         </div>
                     </div>
