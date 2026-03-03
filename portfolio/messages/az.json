@@ -49,12 +49,6 @@
     "login": "Daxil ol",
     "loginGithub": "GitHub ilə daxil ol"
   },
-  "nav": {
-    "home": "FƏXRİ FƏRƏCOV",
-    "projects": "LAYİHƏLƏR",
-    "faq": "SUALLAR",
-    "talk": "ƏLAQƏ"
-  },
   "tab": {
     "default": "Fakhri Farajov Portfolio",
     "comeBack": "Qayıdın!",
@@ -200,5 +194,21 @@
       "cancel": "Ləğv et",
       "confirmDelete": "Layihəni Sil"
     }
+  },
+  "Navbar": {
+    "home": "Ana Səhifə",
+    "motivation": "Motivasiya",
+    "about": "Haqqımda",
+    "projects": "Layihələr",
+    "reviews": "Rəylər",
+    "contact": "Əlaqə"
+  },
+  "Home": {
+    "craftingDigital": "DİJİTAL YARADIRAM",
+    "experiences": "TƏCRÜBƏLƏR",
+    "scrollToExplore": "Araşdırmaq üçün sürüşdürün",
+    "featuredProjects": "Seçilmiş Layihələr",
+    "copyright": "© 2026 Fəxri Fərəcov. Bütün hüquqlar qorunur."
   }
 }
+

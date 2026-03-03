@@ -49,12 +49,6 @@
     "login": "Войти",
     "loginGithub": "Войти через GitHub"
   },
-  "nav": {
-    "home": "ФАХРИ ФАРАДЖОВ",
-    "projects": "ПРОЕКТЫ",
-    "faq": "ВОПРОСЫ",
-    "talk": "КОНТАКТ"
-  },
   "tab": {
     "default": "Fakhri Farajov Portfolio",
     "comeBack": "Вернитесь!",
@@ -222,5 +216,21 @@
       "cancel": "Отмена",
       "confirmDelete": "Удалить проект"
     }    
+  },
+  
+  "Navbar": {
+    "home": "Главная",
+    "motivation": "Мотивация",
+    "about": "Обо мне",
+    "projects": "Проекты",
+    "reviews": "Отзывы",
+    "contact": "Контакты"
+  },
+  "Home": {
+    "craftingDigital": "СОЗДАЮ ЦИФРОВЫЕ",
+    "experiences": "ОПЫТЫ",
+    "scrollToExplore": "Прокрутите для просмотра",
+    "featuredProjects": "Избранные проекты",
+    "copyright": "© 2026 Фахри Фараджов. Все права защищены."
   }
 }

@@ -1,5 +1,5 @@
 import Provider from "@/providers/IntlProvider";
-import Navbar from "@/components/ui/navbar";
+import Navbar from "@/components/Navbar";
 import { getMessages } from "next-intl/server";
 import SilkBg from "@/components/ui/silk";
 
@@ -17,24 +17,6 @@ export default async function LocaleLayout({ children, params }: LocaleLayoutPro
 
   return (
     <Provider messages={messages}>
-      <div
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: -1,
-        }}
-      >
-        <SilkBg
-          speed={5}
-          scale={1}
-          color="#707070ff"
-          noiseIntensity={1.5}
-          rotation={0}
-        />
-      </div>
       <Navbar />
       {children}
     </Provider>

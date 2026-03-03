@@ -89,12 +89,6 @@
     "login": "Login",
     "loginGithub": "Login with GitHub"
   },
-  "nav": {
-    "home": "FAKHRI FARAJOV",
-    "projects": "PROJECTS",
-    "faq": "FAQ",
-    "talk": "TALK"
-  },
   "tab": {
     "default": "Fakhri Farajov Portfolio",
     "comeBack": "Come Back!",
@@ -250,5 +244,20 @@
       "cancel": "Cancel",
       "confirmDelete": "Delete"
     }
+  },
+  "Navbar": {
+    "home": "Home",
+    "motivation": "Motivation",
+    "about": "About",
+    "projects": "Projects",
+    "reviews": "Reviews",
+    "contact": "Contact"
+  },
+  "Home": {
+    "craftingDigital": "CRAFTING DIGITAL",
+    "experiences": "EXPERIENCES",
+    "scrollToExplore": "Scroll to explore",
+    "featuredProjects": "Featured Projects",
+    "copyright": "© 2026 Fakhri Farajov. All rights reserved."
   }
 }
