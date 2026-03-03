@@ -1,7 +1,6 @@
 import Provider from "@/providers/IntlProvider";
 import Navbar from "@/components/Navbar";
 import { getMessages } from "next-intl/server";
-import SilkBg from "@/components/ui/silk";
 
 interface LocaleLayoutProps {
   children: React.ReactNode;
