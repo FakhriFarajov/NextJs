@@ -1,19 +1,5 @@
 {
-  "skills": {
-    "title": "Şəxsi Bacarıqlar",
-    "cards": [
-      { "label": "Ünsiyyət", "title": "Aydın ünsiyyət hər qapını açır.", "description": "Fikirləri aydın ifadə edin və fəal dinləyin." },
-      { "label": "Komanda işi", "title": "Birlikdə daha çox nail oluruq.", "description": "Başqaları ilə effektiv əməkdaşlıq edin." },
-      { "label": "Tənqidi düşüncə", "title": "Sual ver, analiz et, təkmilləşdir.", "description": "Vəziyyətləri analiz edin və əsaslandırılmış qərarlar verin." },
-      { "label": "Problemlərin həlli", "title": "Hər problemin həlli var.", "description": "Çətinliklərə yaradıcı həllər tapın." },
-      { "label": "Zamanın idarə olunması", "title": "Hər dəqiqə önəmlidir.", "description": "Tapşırıqları prioritetləşdirin və müddətə əməl edin." },
-      { "label": "Münaqişələrin həlli", "title": "Münaqişə — inkişaf üçün fürsətdir.", "description": "Fikir ayrılıqlarını konstruktiv şəkildə həll edin." },
-      { "label": "Çeviklik", "title": "Dəyişiklik böyümək üçün şansdır.", "description": "Dəyişən şəraitə uyğunlaşın." },
-      { "label": "Qərarvermə", "title": "Qətiyyətlə qərar verin.", "description": "Ən yaxşı inkişaf yolunu seçin." },
-      { "label": "Etibarlılıq", "title": "Hər işdə etibarlılıq.", "description": "Keyfiyyətli işi davamlı yerinə yetirin." },
-      { "label": "Çoxlu vəzifələrin idarə olunması", "title": "Çox şeyi balanslaşdırın, hamısına yiyələnin.", "description": "Bir neçə məsuliyyəti effektiv idarə edin." }
-    ]
-  },
+
   "talk": {
     "jobTypes": {
       "full_time": "Tam ştat",
@@ -32,11 +18,6 @@
       "SendMessage": "Mesaj göndər"
     },
     "header": "Əlaqə üçün məlumatlarınızı daxil edin"
-  },
-  "Hero": {
-    "name": "Farajov Fakhri",
-    "role": "Full-Stack Developer",
-    "quote": "Əgər bunu istəklə etmirsənsə, deməli sənə lazım deyil."
   },
   "signIn": {
     "title": "Hesabınıza daxil olun",
