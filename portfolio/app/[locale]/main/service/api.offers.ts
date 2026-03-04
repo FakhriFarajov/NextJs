@@ -13,7 +13,6 @@ const api = axios.create({
 const offersAPI = {
     getAllOffers: async () => {
         const response = await api.get("/");
-        console.log("API response for getAllOffers:", response.data);
         return response.data;
     },
     getOfferById: async (id: string) => {

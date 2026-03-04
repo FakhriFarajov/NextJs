@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, useLayoutEffect } from 'react';
+import { useRef, useState, useLayoutEffect, useEffect } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Environment, Center } from '@react-three/drei';
 import gsap from 'gsap';
@@ -11,100 +11,66 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Github, ExternalLink, MessageSquare } from 'lucide-react';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import { useProjectsStore } from './store/use-projects';
+import { useReviewsStore } from './store/use-reviews';
+import { useOffersStore } from './store/use-offers';
+import type { Project } from './types/projects';
+import type { Review } from './types/reviews';
+import { MOTIVATION_TEXTS } from '@/data/motivationTexts';
+import { ABOUT_ME_STEPS } from '@/data/aboutMeSteps';
+import { useRouter } from 'next/navigation';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
-const PROJECTS = [
-  {
-    id: 1,
-    title: "AI Vision Platform",
-    description: "A high-performance computer vision platform built with React and Python.",
-    image: "https://picsum.photos/seed/vision/800/600",
-    tags: ["React", "Python", "TensorFlow"],
-    link: "/projects/1"
-  },
-  {
-    id: 2,
-    title: "Crypto Dashboard",
-    description: "Real-time cryptocurrency tracking and analytics with advanced charting.",
-    image: "https://picsum.photos/seed/crypto/800/600",
-    tags: ["Next.js", "D3.js", "WebSockets"],
-    link: "/projects/2"
-  },
-  {
-    id: 3,
-    title: "E-commerce Redesign",
-    description: "A complete overhaul of a luxury brand's online presence.",
-    image: "https://picsum.photos/seed/shop/800/600",
-    tags: ["Shopify", "Tailwind", "GSAP"],
-    link: "/projects/3"
-  },
-  {
-    id: 4,
-    title: "Social Media App",
-    description: "A decentralized social network focused on privacy and user ownership.",
-    image: "https://picsum.photos/seed/social/800/600",
-    tags: ["Solidity", "React", "IPFS"],
-    link: "/projects/4"
-  }
-];
 
-const MOTIVATION_TEXTS = [
-  "I believe in the power of code to transform ideas into reality.",
-  "Every pixel matters. Every interaction counts.",
-  "Building tools that empower users to achieve more.",
-  "Constant learning is the only way to stay ahead."
-];
 
-const REVIEWS = [
-  {
-    id: 1,
-    name: "Sarah Jenkins",
-    role: "CEO at TechFlow",
-    text: "Fakhri is a visionary engineer. His ability to bridge the gap between complex backend logic and stunning frontend interfaces is unparalleled.",
-    image: "https://picsum.photos/seed/ceo1/200/200"
-  },
-  {
-    id: 2,
-    name: "Marcus Thorne",
-    role: "Founder of BlockScale",
-    text: "Working with Fakhri was a game-changer for our platform. He doesn't just write code; he builds experiences that users fall in love with.",
-    image: "https://picsum.photos/seed/ceo2/200/200"
-  },
-  {
-    id: 3,
-    name: "Elena Rodriguez",
-    role: "CTO at Nexus AI",
-    text: "The attention to detail and performance optimization Fakhri brings to the table is something you rarely see. A true professional in every sense.",
-    image: "https://picsum.photos/seed/ceo3/200/200"
-  }
-];
-
-const ABOUT_ME_STEPS = [
-  {
-    title: "The Beginning",
-    text: "My journey started with a simple 'Hello World' and a passion for problem-solving.",
-    image: "https://picsum.photos/seed/start/600/800"
-  },
-  {
-    title: "Growth",
-    text: "Years of experience building complex systems and leading engineering teams.",
-    image: "https://picsum.photos/seed/growth/600/800"
-  },
-  {
-    title: "Vision",
-    text: "Focused on creating seamless digital experiences that feel like magic.",
-    image: "https://picsum.photos/seed/vision2/600/800"
-  }
-];
-
-export default function Home() {
+const Home = () => {
   const t = useTranslations('Home');
+  const router = useRouter();
+  // Supported locales
+  const supportedLocales = ['en', 'ru', 'az'] as const;
+  type SupportedLocale = typeof supportedLocales[number];
+  // Get locale from URL (assuming /en/, /ru/, /az/ structure)
+  let locale: SupportedLocale = 'en';
+  if (typeof window !== 'undefined') {
+    const urlLocale = window.location.pathname.split('/')[1];
+    if (supportedLocales.includes(urlLocale as SupportedLocale)) {
+      locale = urlLocale as SupportedLocale;
+    }
+  }
+  const motivationTexts = MOTIVATION_TEXTS[locale];
+  const aboutMeSteps = ABOUT_ME_STEPS[locale];
   const containerRef = useRef<HTMLDivElement>(null);
   const horizontalRef = useRef<HTMLDivElement>(null);
   const reviewsRef = useRef<HTMLDivElement>(null);
   const [motivationIndex, setMotivationIndex] = useState(0);
   const [aboutIndex, setAboutIndex] = useState(0);
+
+
+  const { projects, getProjects } = useProjectsStore();
+
+  useEffect(() => {
+    console.log("Fetched projects:", projects);
+    getProjects();
+  }, [getProjects]);
+
+  const { reviews, getReviews } = useReviewsStore();
+
+  useEffect(() => {
+    getReviews();
+    console.log("Fetched reviews:", reviews);
+  }, [getReviews]);
+
+
+  const { createOffer } = useOffersStore();
+  const [offerData, setOfferData] = useState(null);
+
+  const handleCreateOffer = async () => {
+    if (!offerData) return;
+    await createOffer(offerData);
+  };
+
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -134,8 +100,8 @@ export default function Home() {
         scrub: 1,
         onUpdate: (self) => {
           const index = Math.min(
-            Math.floor(self.progress * MOTIVATION_TEXTS.length),
-            MOTIVATION_TEXTS.length - 1
+            Math.floor(self.progress * motivationTexts.length),
+            motivationTexts.length - 1
           );
           setMotivationIndex(index);
         }
@@ -150,8 +116,8 @@ export default function Home() {
         scrub: 1,
         onUpdate: (self) => {
           const index = Math.min(
-            Math.floor(self.progress * ABOUT_ME_STEPS.length),
-            ABOUT_ME_STEPS.length - 1
+            Math.floor(self.progress * aboutMeSteps.length),
+            aboutMeSteps.length - 1
           );
           setAboutIndex(index);
         }
@@ -176,11 +142,11 @@ export default function Home() {
       reviews.forEach((review: any, i) => {
         const text = review.querySelector(".review-text");
         const author = review.querySelector(".review-author");
-        
-        gsap.fromTo(text, 
+
+        gsap.fromTo(text,
           { color: "rgba(163, 163, 163, 0.2)" }, // muted-foreground with low opacity
-          { 
-            color: "var(--foreground)", 
+          {
+            color: "var(--foreground)",
             scrollTrigger: {
               trigger: review,
               start: "top center",
@@ -208,7 +174,7 @@ export default function Home() {
       ScrollTrigger.create({
         trigger: ".reviews-container",
         start: "top top",
-        end: `+=${REVIEWS.length * 100}%`,
+        end: `+=${reviews.length * 100}%`,
         pin: true,
         scrub: 1,
       });
@@ -248,7 +214,7 @@ export default function Home() {
               {t('experiences')}
             </Label>
           </motion.div>
-          
+
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -274,7 +240,7 @@ export default function Home() {
                 className="space-y-6"
               >
                 <h2 className="text-4xl md:text-6xl font-bold leading-tight">
-                  {MOTIVATION_TEXTS[motivationIndex]}
+                  {motivationTexts[motivationIndex]}
                 </h2>
                 <div className="h-1 w-24 bg-foreground" />
               </motion.div>
@@ -301,21 +267,21 @@ export default function Home() {
                   Step {aboutIndex + 1}
                 </span>
                 <h2 className="text-5xl md:text-7xl font-black uppercase tracking-tighter">
-                  {ABOUT_ME_STEPS[aboutIndex].title}
+                  {aboutMeSteps[aboutIndex].title}
                 </h2>
                 <p className="text-xl text-muted-foreground max-w-md">
-                  {ABOUT_ME_STEPS[aboutIndex].text}
+                  {aboutMeSteps[aboutIndex].text}
                 </p>
               </motion.div>
             </AnimatePresence>
           </div>
-          
+
           <div className="relative aspect-[3/4] overflow-hidden rounded-2xl border border-border">
             <AnimatePresence mode="wait">
               <motion.img
                 key={aboutIndex}
-                src={ABOUT_ME_STEPS[aboutIndex].image}
-                alt={ABOUT_ME_STEPS[aboutIndex].title}
+                src={aboutMeSteps[aboutIndex].image}
+                alt={aboutMeSteps[aboutIndex].title}
                 initial={{ scale: 1.2, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0.8, opacity: 0 }}
@@ -333,18 +299,17 @@ export default function Home() {
         <div className="absolute top-24 left-12 z-40">
           <h2 className="text-6xl font-black uppercase tracking-tighter">{t('featuredProjects')}</h2>
         </div>
-        
         <div ref={horizontalRef} className="flex h-full items-center px-[10vw] gap-24">
-          {PROJECTS.map((project) => (
-            <Link 
-              key={project.id} 
-              href={project.link}
+          {projects.map((project: Project) => (
+            <Link
+              key={project._id}
+              href={project.images[0]?.src || '#'}
               className="project-card flex-shrink-0 w-[80vw] md:w-[40vw] group cursor-pointer"
             >
               <div className="relative aspect-video overflow-hidden rounded-xl border border-border mb-6">
-                <img 
-                  src={project.image} 
-                  alt={project.title}
+                <img
+                  src={project.images[0]?.src}
+                  alt={project.images[0]?.alt}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   referrerPolicy="no-referrer"
                 />
@@ -354,17 +319,17 @@ export default function Home() {
               </div>
               <div className="space-y-4">
                 <div className="flex gap-2">
-                  {project.tags.map(tag => (
+                  {project.techStack.map(tag => (
                     <span key={tag} className="text-[10px] uppercase tracking-widest px-2 py-1 bg-secondary rounded-full">
                       {tag}
                     </span>
                   ))}
                 </div>
                 <h3 className="text-3xl font-bold group-hover:text-muted-foreground transition-colors">
-                  {project.title}
+                  {project.titles[0]?.[locale]}
                 </h3>
                 <p className="text-muted-foreground line-clamp-2">
-                  {project.description}
+                  {project.description[0]?.[locale]}
                 </p>
               </div>
             </Link>
@@ -375,14 +340,14 @@ export default function Home() {
       {/* Section 5: Reviews */}
       <section id="reviews" className="reviews-container relative min-h-screen bg-background z-30">
         <div className="container mx-auto px-6 h-full">
-          {REVIEWS.map((review, i) => (
-            <div key={review.id} className="review-item h-screen flex flex-col justify-center items-center text-center max-w-5xl mx-auto">
+          {reviews.map((review: Review, i: number) => (
+            <div key={review._id} className="review-item h-screen flex flex-col justify-center items-center text-center max-w-5xl mx-auto">
               <p className="review-text text-4xl md:text-6xl font-black leading-tight tracking-tighter uppercase mb-12">
-                "{review.text}"
+                "{review.review?.[locale]}"
               </p>
               <div className="review-author flex items-center gap-6">
                 <div className="w-16 h-16 rounded-full overflow-hidden border border-border">
-                  <img src={review.image} alt={review.name} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                  <img src={review.imageObjectName || ''} alt={review.name || ''} className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                 </div>
                 <div className="text-left">
                   <p className="text-xl font-bold">{review.name}</p>
@@ -412,3 +377,5 @@ export default function Home() {
     </main>
   );
 }
+
+export default Home;
