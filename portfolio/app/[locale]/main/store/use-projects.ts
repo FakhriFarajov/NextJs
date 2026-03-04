@@ -4,6 +4,7 @@ import { create } from 'zustand';
 
 interface ProjectsStore {
     projects: Project[];
+    project: Project | null;
     error: string | null;
     loading: boolean;
     getProjects: () => Promise<void>;
@@ -15,13 +16,13 @@ interface ProjectsStore {
 
 export const useProjectsStore = create<ProjectsStore>((set) => ({
     projects: [],
+    project: null,
     error: null,
     loading: false,
     getProjects: async () => {
         set({ loading: true });
         try {
             const data = await projectsAPI.getAllProjects();
-            console.log("Fetched projects:", data);
             set({ projects: data });
         } catch (error) {
             set({ error: error instanceof Error ? error.message : 'An unknown error occurred', loading: false });
@@ -33,9 +34,9 @@ export const useProjectsStore = create<ProjectsStore>((set) => ({
         set({ loading: true });
         try {
             const project = await projectsAPI.getProjectById(id);
-            set({ projects: [project] });
+            set({ project: project });
         } catch (error) {
-            set({ error: error instanceof Error ? error.message : 'An unknown error occurred', loading: false });
+            set({ error: error instanceof Error ? error.message : 'An unknown error occurred', loading: false, project: null });
         } finally {
             set({ loading: false });
         }

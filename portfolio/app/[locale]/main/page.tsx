@@ -20,10 +20,7 @@ import { MOTIVATION_TEXTS } from '@/data/motivationTexts';
 import { ABOUT_ME_STEPS } from '@/data/aboutMeSteps';
 import { useRouter } from 'next/navigation';
 
-
 gsap.registerPlugin(ScrollTrigger);
-
-
 
 const Home = () => {
   const t = useTranslations('Home');
@@ -43,7 +40,6 @@ const Home = () => {
   const aboutMeSteps = ABOUT_ME_STEPS[locale];
   const containerRef = useRef<HTMLDivElement>(null);
   const horizontalRef = useRef<HTMLDivElement>(null);
-  const reviewsRef = useRef<HTMLDivElement>(null);
   const [motivationIndex, setMotivationIndex] = useState(0);
   const [aboutIndex, setAboutIndex] = useState(0);
 
@@ -143,19 +139,6 @@ const Home = () => {
         const text = review.querySelector(".review-text");
         const author = review.querySelector(".review-author");
 
-        gsap.fromTo(text,
-          { color: "rgba(163, 163, 163, 0.2)" }, // muted-foreground with low opacity
-          {
-            color: "var(--foreground)",
-            scrollTrigger: {
-              trigger: review,
-              start: "top center",
-              end: "bottom center",
-              scrub: true,
-            }
-          }
-        );
-
         gsap.fromTo(author,
           { opacity: 0, y: 20 },
           {
@@ -200,7 +183,7 @@ const Home = () => {
       </div>
 
       {/* Section 1: Hero */}
-      <section id="home" className="hero-section relative h-screen flex flex-col items-center justify-center overflow-hidden z-20">
+      <section id="main" className="hero-section relative h-screen flex flex-col items-center justify-center overflow-hidden z-20">
         <div className="text-center space-y-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -303,7 +286,7 @@ const Home = () => {
           {projects.map((project: Project) => (
             <Link
               key={project._id}
-              href={project.images[0]?.src || '#'}
+              href={`/${locale}/main/project/${project._id}`}
               className="project-card flex-shrink-0 w-[80vw] md:w-[40vw] group cursor-pointer"
             >
               <div className="relative aspect-video overflow-hidden rounded-xl border border-border mb-6">

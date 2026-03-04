@@ -51,7 +51,6 @@ export function OfferDetailModal({ offer, isOpen, onOpenChange, jobTypes }: any)
                     <span className="text-[10px] font-black uppercase tracking-[0.2em] text-primary">{t("dashboard.modalOffers.jobProposal")}</span>
                     <DialogTitle className="text-2xl font-bold">{offer.name}</DialogTitle>
                     <DialogDescription className="text-xs text-muted-foreground font-medium">
-                        {t("dashboard.modalOffers.sentFrom", { email: offer.email })}
                     </DialogDescription>
                 </DialogHeader>
 

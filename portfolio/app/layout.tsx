@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import  AuthProvider  from "@/providers/auth-provider";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/route";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,6 +32,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <Toaster />
           </ThemeProvider>
         </AuthProvider>
       </body>

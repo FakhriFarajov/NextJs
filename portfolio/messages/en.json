@@ -14,7 +14,9 @@
       "EmailPlaceholder": "Your Email",
       "Message": "Message",
       "MessagePlaceholder": "Your description",
-      "SendMessage": "Send Message"
+      "SendMessage": "Send Message",
+      "ErrorMessage": "An error occurred while sending your message. Please try again later.",
+      "SuccessMessage": "Your message has been sent successfully!"
     },
     "header": "Leave Your Details"
   },

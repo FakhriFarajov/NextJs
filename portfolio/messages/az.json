@@ -15,7 +15,9 @@
       "EmailPlaceholder": "E-poçtunuz",
       "Message": "Mesaj*",
       "MessagePlaceholder": "Təsviriniz",
-      "SendMessage": "Mesaj göndər"
+      "SendMessage": "Mesaj göndər",
+      "ErrorMessage": "Mesajınız gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
+      "SuccessMessage": "Mesajınız başarıyla gönderildi!"
     },
     "header": "Əlaqə üçün məlumatlarınızı daxil edin"
   },
@@ -127,7 +129,7 @@
       "status_declined": "Rədd edildi",
       "status_hired": "İşə qəbul edildi",
       "jobProposal": "İş Təklifi",
-      "sentFrom": "{company} tərəfindən göndərildi ({email})",
+      "sentFrom": "Göndərən: {company} ({email})",
       "clientMessage": "Müştəri Mesajı",
       "preferredEngagement": "Tövsiyə olunan əməkdaşlıq",
       "receivedOn": "Alınma tarixi",

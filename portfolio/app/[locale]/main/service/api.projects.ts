@@ -13,7 +13,6 @@ const api = axios.create({
 const projectsAPI = {
     getAllProjects: async () => {
         const response = await api.get("");
-        console.log("API response for getAllProjects:", response);
         return response.data;
     },
     getProjectById: async (id: string) => {

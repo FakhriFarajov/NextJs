@@ -17,12 +17,12 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   const navLinks = [
-    { name: t('home'), href: '#home' },
-    { name: t('motivation'), href: '#motivation' },
-    { name: t('about'), href: '#about' },
-    { name: t('projects'), href: '#projects' },
-    { name: t('reviews'), href: '#reviews' },
-    { name: t('contact'), href: '#contact' },
+    { name: t('home'), href: '/main#main' },
+    { name: t('motivation'), href: '/main#motivation' },
+    { name: t('about'), href: '/main#about' },
+    { name: t('projects'), href: '/main#projects' },
+    { name: t('reviews'), href: '/main#reviews' },
+    { name: t('contact'), href: '/main#contact' },
   ];
 
   const locales = [
@@ -58,7 +58,8 @@ export default function Navbar() {
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
-          className="text-xl font-black tracking-tighter uppercase"
+          className="text-xl font-black tracking-tighter uppercase cursor-pointer"
+          onClick={() => router.replace(`/${locale}/main#main`)}
         >
           Fakhri Farajov
         </motion.div>

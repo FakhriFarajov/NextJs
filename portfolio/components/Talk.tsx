@@ -5,7 +5,11 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from "@/components/ui/textarea";
 import { FaRegPaperPlane } from "react-icons/fa";
 import { useTranslations } from 'next-intl';
-
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { talkFormSchema, TalkFormValues } from '@/offerSchema/offer.schema';
+import { useOffersStore } from '@/app/[locale]/main/store/use-offers';
+import { toast } from "sonner"
 
 const jobTypes = [
     { key: 'full_time', value: 'full-time' },
@@ -16,6 +20,7 @@ const jobTypes = [
 
 export default function Talk() {
     const t = useTranslations();
+    const { createOffer } = useOffersStore();
     const [selected, setSelected] = useState(jobTypes[0].value);
 
     const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
@@ -46,6 +51,30 @@ export default function Talk() {
             textShadow: hover ? '0 0 8px var(--foreground), 0 0 16px var(--foreground)' : '0 0 0px transparent',
             duration: 0.3,
         });
+    };
+
+    const {
+        handleSubmit,
+        register,
+        reset,
+        formState: { errors, isSubmitting },
+    } = useForm<TalkFormValues>({
+        resolver: zodResolver(talkFormSchema),
+        defaultValues: {
+            name: '',
+            email: '',
+            message: '',
+        },
+    });
+
+    const onSubmit = async (data: TalkFormValues) => {
+        try {
+            await createOffer({ ...data, jobType: selected });
+            toast.success(t('talk.fields.SuccessMessage'));
+            reset();
+        } catch (err) {
+            toast.error(err instanceof Error ? err.message : t('talk.fields.ErrorMessage'));
+        }
     };
 
     return (
@@ -87,7 +116,7 @@ export default function Talk() {
             </div>
 
             {/* Form Container */}
-            <div className="w-full max-w-md space-y-4 mx-auto">
+            <form className="w-full max-w-md space-y-4 mx-auto" onSubmit={handleSubmit(onSubmit)}>
                 {/* Name Field */}
                 <div className="flex flex-col">
                     <div className="w-fit mb-2">
@@ -96,9 +125,11 @@ export default function Talk() {
                         </Label>
                     </div>
                     <Input 
+                        {...register('name')}
                         placeholder={t(`talk.fields.NamePlaceholder`)} 
                         className="text-xs py-2 px-2 w-full bg-foreground/5 border-border text-foreground rounded-lg placeholder:text-foreground/60" 
                     />
+                    {errors.name && <span className="text-red-500 text-xs mt-1">{errors.name.message}</span>}
                 </div>
 
                 {/* Email Field */}
@@ -109,9 +140,11 @@ export default function Talk() {
                         </Label>
                     </div>
                     <Input 
+                        {...register('email')}
                         placeholder={t(`talk.fields.EmailPlaceholder`)} 
                         className="text-xs py-2 px-2 w-full bg-foreground/5 border-border text-foreground rounded-lg placeholder:text-foreground/60" 
                     />
+                    {errors.email && <span className="text-red-500 text-xs mt-1">{errors.email.message}</span>}
                 </div>
 
                 {/* Message Field */}
@@ -122,16 +155,18 @@ export default function Talk() {
                         </Label>
                     </div>
                     <Textarea 
+                        {...register('message')}
                         placeholder={t(`talk.fields.MessagePlaceholder`)} 
                         className="text-xs p-2 w-full bg-foreground/5 border-border text-foreground rounded-lg resize-none h-[250px] placeholder:text-foreground/60" 
                     />
+                    {errors.message && <span className="text-red-500 text-xs mt-1">{errors.message.message}</span>}
                 </div>
                 
-                <button className="w-full py-2 bg-foreground text-background font-bold rounded-lg hover:bg-foreground/80 transition-colors uppercase tracking-widest mt-4 text-xs flex items-center justify-center gap-2 shadow-paper">
+                <button type="submit" className="w-full py-2 bg-foreground text-background font-bold rounded-lg hover:bg-foreground/80 transition-colors uppercase tracking-widest mt-4 text-xs flex items-center justify-center gap-2 shadow-paper" disabled={isSubmitting}>
                     {t(`talk.fields.SendMessage`)} 
                     <FaRegPaperPlane className="text-base" />
                 </button>
-            </div>
+            </form>
         </div>
     );
 }

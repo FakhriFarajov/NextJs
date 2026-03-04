@@ -14,7 +14,9 @@
       "EmailPlaceholder": "Ваш email",
       "Message": "Сообщение*",
       "MessagePlaceholder": "Ваше описание",
-      "SendMessage": "Отправить сообщение"
+      "SendMessage": "Отправить сообщение",
+      "ErrorMessage": "Произошла ошибка при отправке вашего сообщения. Пожалуйста, попробуйте позже.",
+      "SuccessMessage": "Ваше сообщение успешно отправлено!"
     },
     "header": "Оставьте свои данные"
   },
@@ -148,7 +150,7 @@
       "status_declined": "Отклонено",
       "status_hired": "Принят",
       "jobProposal": "Предложение работы",
-      "sentFrom": "Отправлено из {company} ({email})",
+      "sentFrom": "Отправлено от {company} ({email})",
       "clientMessage": "Сообщение клиента",
       "preferredEngagement": "Предпочтительный формат",
       "receivedOn": "Получено",
