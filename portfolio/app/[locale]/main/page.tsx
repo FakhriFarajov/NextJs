@@ -13,7 +13,6 @@ import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { useProjectsStore } from './store/use-projects';
 import { useReviewsStore } from './store/use-reviews';
-import { useOffersStore } from './store/use-offers';
 import type { Project } from './types/projects';
 import type { Review } from './types/reviews';
 import { MOTIVATION_TEXTS } from '@/data/motivationTexts';
@@ -55,16 +54,6 @@ const Home = ({ params }: { params: Promise<{ locale: string }> }) => {
     getReviews();
     console.log("Fetched reviews:", reviews);
   }, [getReviews]);
-
-
-  const { createOffer } = useOffersStore();
-  const [offerData, setOfferData] = useState(null);
-
-  const handleCreateOffer = async () => {
-    if (!offerData) return;
-    await createOffer(offerData);
-  };
-
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -134,9 +123,7 @@ const Home = ({ params }: { params: Promise<{ locale: string }> }) => {
       // 5. Reviews Section (Vertical pinning with color animation)
       const reviews = gsap.utils.toArray(".review-item");
       reviews.forEach((review: any, i) => {
-        const text = review.querySelector(".review-text");
         const author = review.querySelector(".review-author");
-
         gsap.fromTo(author,
           { opacity: 0, y: 20 },
           {
@@ -150,14 +137,6 @@ const Home = ({ params }: { params: Promise<{ locale: string }> }) => {
             }
           }
         );
-      });
-
-      ScrollTrigger.create({
-        trigger: ".reviews-container",
-        start: "top top",
-        end: `+=${reviews.length * 100}%`,
-        pin: true,
-        scrub: 1,
       });
 
     }, containerRef);
