@@ -108,7 +108,9 @@
         "tools": "Alətlər və Texnologiyalar (yalnız ingilis dili)",
         "projectLink": "Layihə Linki",
         "github": "GitHub Repozitoriyası",
-        "images": "Layihə Şəkilləri"
+        "images": "Layihə Şəkilləri",
+        "video": "Layihə Demo Videosu",
+        "linkedin": "LinkedIn Profili"
       },
       "placeholders": {
         "title": "Başlığı daxil edin...",
@@ -116,11 +118,14 @@
         "role": "məsələn, Baş Proqramçı",
         "tools": "Aləti yazın və Enter basın",
         "projectLink": "https://...",
-        "github": "https://github.com/..."
+        "github": "https://github.com/...",
+        "video": "Demo video yüklə...",
+        "linkedin": "https://linkedin.com/in/yourprofile"
       },
       "actions": {
         "upload": "Yüklə",
-        "save": "Layihəni Saxla"
+        "save": "Layihəni Saxla",
+        "uploadVideo": "Video Yüklə"
       }
     },
     "modalOffers": {

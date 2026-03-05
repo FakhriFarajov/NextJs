@@ -1,4 +1,3 @@
-
 export interface LocalizedField {
     en: string;
     ru: string;
@@ -17,6 +16,9 @@ export interface Project {
     role: LocalizedField[];
     techStack: string[];
     images: ProjectImage[];
+    video: string; // Cloudinary URL
+    githubURL: string;
+    linkedIn: string;
     createdAt: string | Date | null;
     updatedAt: string | Date | null;
 }

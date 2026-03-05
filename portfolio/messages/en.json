@@ -117,7 +117,9 @@
         "tools": "Tools & Technologies (English Only)",
         "projectLink": "Project Link",
         "github": "GitHub Repository",
-        "images": "Project Images"
+        "images": "Project Images",
+        "video": "Project Demo Video",
+        "linkedin": "LinkedIn Profile"
       },
       "placeholders": {
         "title": "Enter title...",
@@ -125,11 +127,14 @@
         "role": "e.g. Lead Developer",
         "tools": "Type tool and press Enter",
         "projectLink": "https://...",
-        "github": "https://github.com/..."
+        "github": "https://github.com/...",
+        "video": "Upload demo video...",
+        "linkedin": "https://linkedin.com/in/yourprofile"
       },
       "actions": {
         "upload": "Upload",
-        "save": "Save Project"
+        "save": "Save Project",
+        "uploadVideo": "Upload Video"
       }
     },
     "modalOffers": {

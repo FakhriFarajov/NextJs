@@ -34,6 +34,9 @@ export function ProjectModal({ trigger, open, onOpenChange, initialData }: Proje
   const [descriptions, setDescriptions] = useState<{ [key: string]: string }>({ en: "", az: "", ru: "" })
   const [roles, setRoles] = useState<{ [key: string]: string }>({ en: "", az: "", ru: "" })
   const [images, setImages] = useState<string[]>([])
+  const [video, setVideo] = useState("");
+  const [githubURL, setGithubURL] = useState("");
+  const [linkedIn, setLinkedIn] = useState("");
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -56,12 +59,18 @@ export function ProjectModal({ trigger, open, onOpenChange, initialData }: Proje
       });
       setTools(initialData.techStack || []);
       setImages((initialData.images || []).map((img: any) => img.src));
+      setVideo(initialData.video || "");
+      setGithubURL(initialData.githubURL || "");
+      setLinkedIn(initialData.linkedIn || "");
     } else {
       setTitles({ en: "", az: "", ru: "" });
       setDescriptions({ en: "", az: "", ru: "" });
       setRoles({ en: "", az: "", ru: "" });
       setTools([]);
       setImages([]);
+      setVideo("");
+      setGithubURL("");
+      setLinkedIn("");
     }
   }, [initialData])
 
@@ -91,18 +100,25 @@ export function ProjectModal({ trigger, open, onOpenChange, initialData }: Proje
     e.preventDefault();
     setLoading(true);
     setError(null);
+    // Build Project object according to interface
     const projectData = {
       titles: [{ en: titles.en, ru: titles.ru, az: titles.az }],
       description: [{ en: descriptions.en, ru: descriptions.ru, az: descriptions.az }],
       role: [{ en: roles.en, ru: roles.ru, az: roles.az }],
       techStack: tools,
-      images: images.map(src => ({ src, alt: titles.en || "Project image" }))
+      images: images.map(src => ({ src, alt: titles.en || "Project image" })),
+      video,
+      _id: initialData?._id || null,
+      githubURL,
+      linkedIn,
+      createdAt: initialData?.createdAt || null,
+      updatedAt: initialData?.updatedAt || null
     };
     try {
       if (initialData && initialData._id) {
-        await updateProject(initialData._id, projectData as any);
+        await updateProject(initialData._id, projectData);
       } else {
-        await createProject(projectData as any);
+        await createProject(projectData);
       }
       await getProjects();
       onOpenChange && onOpenChange(false);
@@ -177,15 +193,16 @@ export function ProjectModal({ trigger, open, onOpenChange, initialData }: Proje
 
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label>{t("fields.projectLink")}</Label>
-              <div className="flex gap-2">
-                <div className="flex size-10 items-center justify-center rounded-md border bg-muted"><LinkIcon className="size-4" /></div>
-                <Input placeholder={t("placeholders.projectLink")}/>
-              </div>
+              <Label>{t("fields.github")}</Label>
+              <Input placeholder={t("placeholders.github")} value={githubURL} onChange={e => setGithubURL(e.target.value)} />
             </div>
             <div className="space-y-2">
-              <Label>{t("fields.github")}</Label>
-              <Input placeholder={t("placeholders.github")}/>
+              <Label>{t("fields.linkedin")}</Label>
+              <Input placeholder={t("placeholders.linkedin")} value={linkedIn} onChange={e => setLinkedIn(e.target.value)} />
+            </div>
+            <div className="space-y-2">
+              <Label>{t("fields.video")}</Label>
+              <Input placeholder={t("placeholders.video")} value={video} onChange={e => setVideo(e.target.value)} />
             </div>
           </div>
 

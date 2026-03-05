@@ -21,7 +21,6 @@ export const useProjectsStore = create<ProjectsStore>((set) => ({
         set({ loading: true });
         try {
             const data = await projectsAPI.getAllProjects();
-            console.log("Fetched projects:", data);
             set({ projects: data });
         } catch (error) {
             set({ error: error instanceof Error ? error.message : 'An unknown error occurred', loading: false });

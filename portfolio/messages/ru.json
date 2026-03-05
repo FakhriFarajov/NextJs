@@ -129,7 +129,9 @@
         "tools": "Инструменты и технологии (только на английском)",
         "projectLink": "Ссылка на проект",
         "github": "Репозиторий GitHub",
-        "images": "Изображения проекта"
+        "images": "Изображения проекта",
+        "video": "Демо-видео проекта",
+        "linkedin": "Профиль LinkedIn"
       },
       "placeholders": {
         "title": "Введите название...",
@@ -137,11 +139,14 @@
         "role": "например, ведущий разработчик",
         "tools": "Введите инструмент и нажмите Enter",
         "projectLink": "https://...",
-        "github": "https://github.com/..."
+        "github": "https://github.com/...",
+        "video": "Загрузить демо-видео...",
+        "linkedin": "https://linkedin.com/in/yourprofile"
       },
       "actions": {
         "upload": "Загрузить",
-        "save": "Сохранить проект"
+        "save": "Сохранить проект",
+        "uploadVideo": "Загрузить видео"
       }
     },
     "modalOffers": {
