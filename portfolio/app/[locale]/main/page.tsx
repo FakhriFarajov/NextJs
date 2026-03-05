@@ -19,25 +19,23 @@ import type { Review } from './types/reviews';
 import { MOTIVATION_TEXTS } from '@/data/motivationTexts';
 import { ABOUT_ME_STEPS } from '@/data/aboutMeSteps';
 import { useRouter } from 'next/navigation';
+import React from "react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Home = () => {
+const Home = ({ params }: { params: Promise<{ locale: string }> }) => {
   const t = useTranslations('Home');
   const router = useRouter();
   // Supported locales
   const supportedLocales = ['en', 'ru', 'az'] as const;
   type SupportedLocale = typeof supportedLocales[number];
-  // Get locale from URL (assuming /en/, /ru/, /az/ structure)
-  let locale: SupportedLocale = 'en';
-  if (typeof window !== 'undefined') {
-    const urlLocale = window.location.pathname.split('/')[1];
-    if (supportedLocales.includes(urlLocale as SupportedLocale)) {
-      locale = urlLocale as SupportedLocale;
-    }
-  }
-  const motivationTexts = MOTIVATION_TEXTS[locale];
-  const aboutMeSteps = ABOUT_ME_STEPS[locale];
+  // Unwrap params using React.use()
+  const { locale } = React.use(params);
+  const localeValue: SupportedLocale = supportedLocales.includes(locale as SupportedLocale)
+    ? (locale as SupportedLocale)
+    : 'en';
+  const motivationTexts = MOTIVATION_TEXTS[localeValue];
+  const aboutMeSteps = ABOUT_ME_STEPS[localeValue];
   const containerRef = useRef<HTMLDivElement>(null);
   const horizontalRef = useRef<HTMLDivElement>(null);
   const [motivationIndex, setMotivationIndex] = useState(0);

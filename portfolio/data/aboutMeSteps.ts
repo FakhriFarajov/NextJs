@@ -3,7 +3,7 @@ export const ABOUT_ME_STEPS = {
     {
       title: "The Beginning",
       text: "My journey started with a simple 'Hello World' and a passion for problem-solving.",
-      image: "https://picsum.photos/seed/start/600/800"
+      image: "https://picsum.photos/seed/growth/600/800"
     },
     {
       title: "Growth",
@@ -20,7 +20,7 @@ export const ABOUT_ME_STEPS = {
     {
       title: "Начало",
       text: "Мой путь начался с простого 'Hello World' и страсти к решению проблем.",
-      image: "https://picsum.photos/seed/start/600/800"
+      image: "https://picsum.photos/seed/growth/600/800"
     },
     {
       title: "Рост",
@@ -37,7 +37,7 @@ export const ABOUT_ME_STEPS = {
     {
       title: "Başlanğıc",
       text: "Səyahətim sadə 'Hello World' və problem həllinə olan həvəs ilə başladı.",
-      image: "https://picsum.photos/seed/start/600/800"
+      image: "https://picsum.photos/seed/growth/600/800"
     },
     {
       title: "İnkişaf",
