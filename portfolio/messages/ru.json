@@ -18,6 +18,13 @@
       "ErrorMessage": "Произошла ошибка при отправке вашего сообщения. Пожалуйста, попробуйте позже.",
       "SuccessMessage": "Ваше сообщение успешно отправлено!"
     },
+    "validation": {
+      "nameRequired": "Имя обязательно",
+      "nameTooLong": "Имя слишком длинное",
+      "emailInvalid": "Пожалуйста, введите корректный email",
+      "messageTooShort": "Сообщение должно быть не менее 10 символов",
+      "messageTooLong": "Сообщение слишком длинное"
+    },
     "header": "Оставьте свои данные"
   },
   "signIn": {
@@ -90,6 +97,16 @@
       "delete": "Удалить",
       "projectTitle": "Проект №{number}",
       "builtWith": "Сделано с помощью",
+    "backToProjects": "Назад к проектам",
+    "untitledProject": "Безымянный проект",
+    "noImages": "Нет изображений проекта",
+    "created": "Создан:",
+    "notAvailable": "Н/Д",
+    "projectId": "ID проекта:",
+    "github": "Github",
+    "linkedin": "LinkedIn",
+    "lastUpdated": "Последнее обновление:",
+    "dash": "-",
       "languages": "Языки",
       "showing": "Показаны",
       "to": "по",

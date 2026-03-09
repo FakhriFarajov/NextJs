@@ -94,10 +94,19 @@ export default function Projects() {
                                                 </DropdownMenuContent>
                                             </DropdownMenu>
                                         </div>
-                                        {/* Placeholder for real image */}
-                                        <div className="h-full w-full bg-gradient-to-br from-muted to-muted/20 flex items-center justify-center">
-                                             <span className="text-[10px] text-muted-foreground font-mono">IMG_{project._id}.PNG</span>
-                                        </div>
+                                        {/* Real project image or fallback */}
+                                        {project.images && project.images.length > 0 ? (
+                                            <img
+                                                src={project.images[0].src}
+                                                alt={project.images[0].alt || `Project ${project._id}`}
+                                                className="h-full w-full object-cover rounded-t-lg"
+                                                referrerPolicy="no-referrer"
+                                            />
+                                        ) : (
+                                            <div className="h-full w-full bg-gradient-to-br from-muted to-muted/20 flex items-center justify-center">
+                                                <span className="text-[10px] text-muted-foreground font-mono">IMG_{project._id}.PNG</span>
+                                            </div>
+                                        )}
                                     </div>
 
                                     {/* Content Section */}
@@ -108,8 +117,17 @@ export default function Projects() {
                                         </p>
                                         <div className="mt-3 flex items-center justify-between">
                                             <span className="rounded-md bg-secondary px-1.5 py-0.5 text-[10px] font-medium">{t("languages")}</span>
-                                            <div className="flex gap-1">
-                                                <div className="size-1.5 rounded-full bg-emerald-500" />
+                                            <div className="flex gap-1 overflow-x-auto scrollbar-thin scrollbar-thumb-muted/40 scrollbar-track-transparent">
+                                                {project.techStack && project.techStack.length > 0 ? (
+                                                    project.techStack.map((tag, idx) => (
+                                                        <span
+                                                            key={tag + idx}
+                                                            className="px-2 py-0.5 text-[10px] rounded-full bg-secondary/40 border border-border font-mono text-muted-foreground whitespace-nowrap"
+                                                        >
+                                                            {tag}
+                                                        </span>
+                                                    ))
+                                                ) : null}
                                             </div>
                                         </div>
                                     </div>

@@ -19,6 +19,13 @@
       "ErrorMessage": "Mesajınız gönderilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.",
       "SuccessMessage": "Mesajınız başarıyla gönderildi!"
     },
+    "validation": {
+      "nameRequired": "Ad tələb olunur",
+      "nameTooLong": "Ad çox uzundur",
+      "emailInvalid": "Zəhmət olmasa düzgün e-poçt ünvanı daxil edin",
+      "messageTooShort": "Mesaj ən azı 10 simvol olmalıdır",
+      "messageTooLong": "Mesaj çox uzundur"
+    },
     "header": "Əlaqə üçün məlumatlarınızı daxil edin"
   },
   "signIn": {
@@ -79,6 +86,16 @@
       "delete": "Sil",
       "projectTitle": "Layihə #{number}",
       "builtWith": "Hazırlanıb",
+    "backToProjects": "Layihələrə qayıt",
+    "untitledProject": "Adsız layihə",
+    "noImages": "Layihə şəkilləri yoxdur",
+    "created": "Yaradılıb:",
+    "notAvailable": "Mövcud deyil",
+    "projectId": "Layihə ID-si:",
+    "github": "Github",
+    "linkedin": "LinkedIn",
+    "lastUpdated": "Son yeniləmə:",
+    "dash": "-",
       "languages": "Dillər",
       "showing": "Göstərilir",
       "to": "-",

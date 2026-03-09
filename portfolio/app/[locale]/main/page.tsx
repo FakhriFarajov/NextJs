@@ -19,6 +19,7 @@ import { MOTIVATION_TEXTS } from '@/data/motivationTexts';
 import { ABOUT_ME_STEPS } from '@/data/aboutMeSteps';
 import { useRouter } from 'next/navigation';
 import React from "react";
+import { Badge } from '@/components/ui/badge';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -278,11 +279,11 @@ const Home = ({ params }: { params: Promise<{ locale: string }> }) => {
                 </div>
               </div>
               <div className="space-y-4">
-                <div className="flex gap-2">
+                <div className="flex gap-2 overflow-x-auto scrollbar-thin scrollbar-thumb-rounded scrollbar-thumb-muted py-1">
                   {project.techStack.map(tag => (
-                    <span key={tag} className="text-[10px] uppercase tracking-widest px-2 py-1 bg-secondary rounded-full">
+                    <Badge key={tag} className="uppercase tracking-widest text-[10px] px-2 py-1 whitespace-nowrap">
                       {tag}
-                    </span>
+                    </Badge>
                   ))}
                 </div>
                 <h3 className="text-3xl font-bold group-hover:text-muted-foreground transition-colors">

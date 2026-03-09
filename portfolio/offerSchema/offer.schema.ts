@@ -1,12 +1,18 @@
 import { z } from 'zod';
 
-export const talkFormSchema = z.object({
-  name: z.string().min(2, 'Name is required').max(50, 'Name is too long'),
-  email: z.string().email('Please enter a valid email address'),
-  message: z.string().min(10, 'Message must be at least 10 characters').max(500, 'Message is too long'),
-});
+export const talkFormSchema = (t: (key: string) => string) =>
+  z.object({
+    name: z.string()
+      .min(2, t('talk.validation.nameRequired'))
+      .max(50, t('talk.validation.nameTooLong')),
+    email: z.string()
+      .email(t('talk.validation.emailInvalid')),
+    message: z.string()
+      .min(10, t('talk.validation.messageTooShort'))
+      .max(5000, t('talk.validation.messageTooLong')),
+  });
 
-export type TalkFormValues = z.infer<typeof talkFormSchema>;
+export type TalkFormValues = z.infer<ReturnType<typeof talkFormSchema>>;
 
 export default {
   talkFormSchema,

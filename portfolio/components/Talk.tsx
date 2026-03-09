@@ -59,7 +59,7 @@ export default function Talk() {
         reset,
         formState: { errors, isSubmitting },
     } = useForm<TalkFormValues>({
-        resolver: zodResolver(talkFormSchema),
+        resolver: zodResolver(talkFormSchema(t)),
         defaultValues: {
             name: '',
             email: '',

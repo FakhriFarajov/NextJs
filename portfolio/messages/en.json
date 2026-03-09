@@ -18,6 +18,13 @@
       "ErrorMessage": "An error occurred while sending your message. Please try again later.",
       "SuccessMessage": "Your message has been sent successfully!"
     },
+    "validation": {
+      "nameRequired": "Name is required",
+      "nameTooLong": "Name is too long",
+      "emailInvalid": "Please enter a valid email address",
+      "messageTooShort": "Message must be at least 10 characters",
+      "messageTooLong": "Message is too long"
+    },
     "header": "Leave Your Details"
   },
   "signIn": {
@@ -78,6 +85,16 @@
       "delete": "Delete",
       "projectTitle": "Project #{number}",
       "builtWith": "Built with",
+    "backToProjects": "Back to Projects",
+    "untitledProject": "Untitled Project",
+    "noImages": "No project images available",
+    "created": "Created:",
+    "notAvailable": "N/A",
+    "projectId": "Project ID:",
+    "github": "Github",
+    "linkedin": "LinkedIn",
+    "lastUpdated": "Last Updated:",
+    "dash": "-",
       "languages": "Languages",
       "showing": "Showing",
       "to": "to",
